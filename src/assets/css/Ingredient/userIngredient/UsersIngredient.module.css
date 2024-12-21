@@ -1,0 +1,15 @@
+/* UserIngredient.module.css */
+
+.container {
+    padding: 1rem;
+    background-color: #f0fff0; /* 연한 녹색 배경 */
+    text-align: center;
+}
+
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap; /* 줄바꿈 허용 */
+    justify-content: flex-start; /* 카드들을 왼쪽 정렬 */
+    gap: 1rem; /* 카드 간격 */
+}
+
