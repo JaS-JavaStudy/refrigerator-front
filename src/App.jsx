@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Layout from "./pages/layouts/Layout"
 import Ingredient from "./pages/ingredient/Ingregdient"
-import UsersIngredientItem from "./components/ingredient/UsersIngredientItem"
 
 function App() {
   return (
