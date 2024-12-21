@@ -3,7 +3,6 @@ import Layout from "./pages/layouts/Layout"
 import Ingredient from "./pages/ingredient/Ingregdient"
 import Recipe from "./pages/recipe/Recipe"
 import {AddRecipe} from "./pages/recipe/AddRecipe"
-import UsersIngredientItem from "./components/ingredient/UsersIngredientItem"
 
 function App() {
     return (
