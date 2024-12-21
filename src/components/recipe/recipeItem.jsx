@@ -1,6 +1,10 @@
-const RecipeCard = ({ recipe }) => {
+import recipeImage from "../../assets/image/recipeimage.png"
+
+const RecipeItem = ({ recipe }) => {
     return (
         <div >
+            <img src={recipeImage} alt="Default Recipe Image" style={{ width: '100px', height: 'auto' }} />
+            <p>사진:{recipe.recipeSource}</p>
             <h3>이름:{recipe.recipeName}</h3>
             <p>내용:{recipe.recipeContent}</p>
             <p>조리시간:{recipe.recipeCookingTime}(단위)</p>
@@ -10,4 +14,4 @@ const RecipeCard = ({ recipe }) => {
     );
 };
 
-export default RecipeCard
+export default RecipeItem

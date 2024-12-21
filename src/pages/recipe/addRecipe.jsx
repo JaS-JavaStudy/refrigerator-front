@@ -62,6 +62,7 @@ export const AddRecipe = () => {
     // 파일 업로드 처리
     const handleRecipeSourcesChange = (e) => {
         setRecipeSources(Array.from(e.target.files)); // 여러 파일을 배열로 추가
+        console.log(Array.from(e.target.files))
     };
 
 
