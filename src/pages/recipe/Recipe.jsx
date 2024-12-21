@@ -2,8 +2,8 @@ import { useEffect, useState,useCallback } from "react"
 import { getRecipeList } from "../../sources/api/recipeAPI.jsx";
 import {Route, useNavigate} from "react-router-dom";
 import { AddRecipe} from "./addRecipe.jsx";
-import RecipeCard from "../../components/recipe/recipeCard.jsx"
-import "../../assets/css/recipe.css"
+import RecipeItem from "../../components/recipe/recipeItem.jsx"
+import "../../assets/css/recipe/recipe.css"
 
 function Recipe() {
     const [recipeList, setRecipeList] = useState([])
@@ -32,7 +32,7 @@ function Recipe() {
             <h1>레시피 페이지</h1>
             <div className="recipe-wrapper">
                 {recipeList.map((recipe) => (
-                    <RecipeCard key={recipe.recipePk} recipe={recipe} />
+                    <RecipeItem key={recipe.recipePk} recipe={recipe} />
                 ))}
             </div>
             <ul>
