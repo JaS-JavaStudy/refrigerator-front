@@ -1,8 +1,22 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import style from '../../../assets/css/Ingredient/userIngredient/UsersIngredientItem.module.css';
+import React, { useState } from 'react';
+import { updateIngredientBookmark } from '../../../sources/api/IngredientAPI';
 
 function UsersIngredientItem({ userIngredient }) {
+    const [isBookmarked, setIsBookmarked] = useState(userIngredient.bookmarked || false);
+
+    const toggleBookmark = () => {
+        const newBookmarkState = !isBookmarked;
+        setIsBookmarked(newBookmarkState); // 즐겨찾기 상태 업데이트
+        
+
+        // 서버로 상태 업데이트 (필요시)
+        updateIngredientBookmark(1, isBookmarked, userIngredient)
+    };
+
+    console.log(userIngredient);
     return (
         <Card className={style.card}>
             <div className={style.imageWrapper}>
@@ -13,10 +27,10 @@ function UsersIngredientItem({ userIngredient }) {
                 />
                 <div className={style.favoriteAndQuantity}>
                     <button
-                        className={style.favoriteButton}
-                        onClick={() => console.log(`${userIngredient.ingredientName} 즐겨찾기 클릭됨`)}
+                        className={`${style.favoriteButton} ${isBookmarked ? style.active : ''}`} // 즐겨찾기 상태에 따른 스타일
+                        onClick={toggleBookmark}
                     >
-                        ⭐
+                        {isBookmarked ? '⭐' : '☆'} {/* 상태에 따른 아이콘 */}
                     </button>
                     <div className={style.quantity}>
                         수량: {userIngredient.ingredientAmount || 0}

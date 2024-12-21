@@ -17,3 +17,39 @@ export async function getUsersIngredient() {
         throw err; // 호출자에게 에러 전달
     }
 }
+
+export function updateIngredientBookmark(userPk, isBookmarked, ingredient) {
+    if (!isBookmarked) {
+        axios({
+            url: `${BASE_URL}/bookmark/regist`,
+            method: 'post',
+            data: {
+                userPk: userPk,
+                ingredientMyRefrigeratorPk: ingredient.ingredientMyRefrigeratorPk
+            }
+        })
+        .then((res) => {
+            console.log(res);
+            console.log("추가됨");
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    } else {
+        axios({
+            url: `${BASE_URL}/bookmark/delete`,
+            method: 'delete',
+            data: {
+                userPk: userPk,
+                ingredientBookmarkPk: ingredient.ingredientBookmarkPk
+            }
+        })
+        .then((res) => {
+            console.log(res);
+            console.log("삭제됨");
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+}
