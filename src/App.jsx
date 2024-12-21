@@ -1,9 +1,20 @@
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Layout from "./pages/layouts/Layout"
+import Ingredient from "./pages/ingredient/Ingregdient"
+import UsersIngredientItem from "./components/ingredient/UsersIngredientItem"
 
+function App() {
   return (
-    <h1>
-      test
-    </h1>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout/>}>
+          <Route path="ingredient">
+            <Route index element={<Ingredient/>}/>
+            {/* <Route path=':ingredientMyRefrigeratorPk' element={<UsersIngredientItem/>} /> */}
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
