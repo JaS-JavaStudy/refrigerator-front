@@ -7,4 +7,19 @@
 
 * {
     font-family: Pretendard-Regular;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column; /* 상하 레이아웃 정렬 */
+    min-height: 1200px; /* 화면 전체 높이 */
+    background-color: #f9f9f9;
+}
+
+main {
+    flex: 1; /* 메인 콘텐츠가 남은 공간을 차지 */
+    padding: 1rem;
 }
