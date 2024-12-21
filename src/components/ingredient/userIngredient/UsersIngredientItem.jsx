@@ -14,6 +14,7 @@ function UsersIngredientItem({ userIngredient }) {
 
         // 서버로 상태 업데이트 (필요시)
         updateIngredientBookmark(1, isBookmarked, userIngredient)
+        userIngredient.bookmarked = !userIngredient.bookmarked
     };
 
     console.log(userIngredient);
