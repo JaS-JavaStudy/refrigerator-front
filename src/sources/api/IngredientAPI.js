@@ -2,6 +2,18 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/ingredient";
 
+function getUserPkFromToken(token) {
+  try {
+    const payload = token.split(".")[1]; // 토큰의 payload 부분
+    const decoded = JSON.parse(atob(payload)); // Base64 디코딩 후 JSON 파싱
+    return decoded.username; // username에 담긴 userPk 반환
+  } catch (error) {
+    console.error("Failed to decode token:", error);
+    return null;
+  }
+}
+
+
 export async function getAllIngredients() {
   try {
     const response = await axios.get(`${BASE_URL}`); // 백엔드에 전체 재료 목록을 가져오는 API 필요
@@ -13,12 +25,15 @@ export async function getAllIngredients() {
 }
 
 export async function addIngredientToMyRefrigerator(ingredientData) {
+  const token = localStorage.getItem("token")
+  const extractedUserPk = getUserPkFromToken(token);
+
   try {
     const response = await axios({
       url: `${BASE_URL}`,
       method: "post",
       params: {
-        userPk: 1, // 실제 로그인된 사용자 PK로 교체 필요
+        userPk: extractedUserPk, // 실제 로그인된 사용자 PK로 교체 필요
         ingredientManagementPk: ingredientData.ingredientManagementPk,
       },
       data: {
@@ -35,12 +50,15 @@ export async function addIngredientToMyRefrigerator(ingredientData) {
 }
 
 export async function createIngredient(ingredientData) {
+  const token = localStorage.getItem("token")
+  const extractedUserPk = getUserPkFromToken(token);
+
   try {
     const response = await axios({
       url: `${BASE_URL}`,
       method: "post",
       params: {
-        userPk: 1,
+        userPk: extractedUserPk,
         ingredientManagementPk: ingredientData.ingredientManagementPk,
       },
       data: {
@@ -83,12 +101,14 @@ export async function deleteIngredient(
 }
 
 export async function getUsersIngredient() {
+  const token = localStorage.getItem("token")
+  const extractedUserPk = getUserPkFromToken(token);
   try {
     const response = await axios({
       url: `${BASE_URL}`,
       method: "get",
       params: {
-        userPk: 1,
+        userPk: extractedUserPk,
       },
     });
     return response.data; // 데이터를 반환
@@ -99,12 +119,14 @@ export async function getUsersIngredient() {
 }
 
 export function updateIngredientBookmark(userPk, isBookmarked, ingredient) {
+  const token = localStorage.getItem("token")
+  const extractedUserPk = getUserPkFromToken(token);
   if (!isBookmarked) {
     axios({
       url: `${BASE_URL}/bookmark/regist`,
       method: "post",
       data: {
-        userPk: userPk,
+        userPk: extractedUserPk,
         ingredientMyRefrigeratorPk: ingredient.ingredientMyRefrigeratorPk,
       },
     })
@@ -120,7 +142,7 @@ export function updateIngredientBookmark(userPk, isBookmarked, ingredient) {
       url: `${BASE_URL}/bookmark/delete`,
       method: "delete",
       data: {
-        userPk: userPk,
+        userPk: extractedUserPk,
         ingredientBookmarkPk: ingredient.ingredientBookmarkPk,
       },
     })

@@ -22,7 +22,7 @@ function RecipeDetail() {
 
     const imgSrc = 
         recipeDetail.recipeSource && recipeDetail.recipeSource.length > 0
-            ? recipeDetail.recipeSource[0].recipeSourceSave
+            ? recipeDetail.recipeSource[0]?.recipeSourceSave
             : defaultRecipeImg;
 
     return (
@@ -50,7 +50,7 @@ function RecipeDetail() {
             <h2>요리과정</h2>
             {recipeDetail.recipeStep && 
             recipeDetail.recipeStep.map((step, index) => (
-                <div key={step.recipeStepOrder}>
+                <div key={step?.recipeStepOrder}>
                     <p>Step {index + 1}: {step.recipeStepContent}</p>
                     {step.recipeStepSource && (
                         <img

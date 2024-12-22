@@ -23,8 +23,21 @@ export const createRecipe = async (recipe) => {
     return res.data;
 }
 
+export const recipeCategory = async () => {
+    const url = `${prefix}/category`;
+    const res = await axios.get(url);
+    return res.data;
+}
+
 export const getRecommendedRecipes = async (userPk) => {
     const url = `${prefix}/recommend?userPk=${userPk}`;
     const res = await axios.get(url);
     return res.data;
+}
+
+export const updateRecipe = async (recipe) => {
+    const url = `${prefix}`;
+    const res = await axios.put(url,recipe);
+    return res.data;
+
 }
