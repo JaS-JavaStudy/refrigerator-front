@@ -1,0 +1,43 @@
+/* SearchIngredient.module.css */
+.searchContainer {
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.searchSection {
+  margin-bottom: 1.5rem;
+}
+
+.searchInputWrapper {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0 auto;
+}
+
+.searchIcon {
+  color: #666;
+  margin-right: 0.75rem;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.addSection {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
