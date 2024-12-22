@@ -4,7 +4,7 @@ import {Route, useNavigate} from "react-router-dom";
 import RecipeItem from "../../components/recipe/RecipeItem.jsx"
 import "../../assets/css/recipe/recipe.css"
 
-function recipe() {
+function Recipe() {
     const [recipeList, setRecipeList] = useState([])
     const navigate = useNavigate();
 
@@ -42,4 +42,4 @@ function recipe() {
         </>
     )
 }
-export default recipe
+export default Recipe
