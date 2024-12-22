@@ -7,6 +7,7 @@ import {AddRecipe} from "./pages/recipe/AddRecipe"
 import Join from "./pages/user/Join"
 import Login from "./pages/user/Login"
 import RecipeRecommend from "./pages/recipe/RecipeRecommend"
+import RecipeRandom from "./pages/recipe/RecipeRandom"
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                         <Route path='create' element={<AddRecipe/>} />
                         <Route path='recommend/:userPk' element={<RecipeRecommend/>} />
                         <Route path=':recipePk' element={<RecipeDetail/>}/>
+                        <Route path='random' element={<RecipeRandom/>}/>
                     </Route>
                     <Route path="join" element={<Join/>} />
                     <Route path="login" element={<Login/>} />

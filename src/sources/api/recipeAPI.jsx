@@ -32,3 +32,9 @@ export const getRecommendedRecipes = async (userPk) => {
     const res = await axios.get(url);
     return res.data;
 }
+
+export const getRandomRecipe = async () => {
+    const url = `${prefix}/random`;
+    const res = await axios.get(url);
+    return res.data;
+}
