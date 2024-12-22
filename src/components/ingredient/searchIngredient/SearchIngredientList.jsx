@@ -1,4 +1,4 @@
-// components/ingredient/searchIngredient/SearchIngredientList.jsx
+// SearchIngredientList.jsx
 import React, { useState } from 'react';
 import style from '../../../assets/css/ingredient/ingredient/SearchIngredientList.module.css';
 import AddIngredientModal from '../modal/AddIngredientModal';
@@ -21,6 +21,7 @@ const SearchIngredientList = ({ isLoading, ingredients, onAddIngredient }) => {
   // 페이지 변경 핸들러
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -47,13 +48,17 @@ const SearchIngredientList = ({ isLoading, ingredients, onAddIngredient }) => {
           getCurrentPageIngredients().map((ingredient) => (
             <div key={ingredient.ingredientManagementPk} className={style.cardContainer}>
               <div className={style.ingredientCard}>
+                <img
+                  src={ingredient.image || 'https://cdn.mindgil.com/news/photo/202211/75510_16178_5715.jpg'}
+                  alt={ingredient.ingredientName}
+                  className={style.ingredientImage}
+                />
                 <button
                   onClick={() => setSelectedIngredient(ingredient)}
                   className={style.statusDot}
                 >
                   +
                 </button>
-                <div className={style.whitespace} />
               </div>
               <div className={style.textContent}>
                 <div className={style.ingredientName}>{ingredient.ingredientName}</div>
@@ -65,8 +70,16 @@ const SearchIngredientList = ({ isLoading, ingredients, onAddIngredient }) => {
       </div>
 
       {/* 페이지네이션 */}
-      {ingredients.length > 0 && !isLoading && (
+      {ingredients.length > itemsPerPage && !isLoading && (
         <div className={style.pagination}>
+          <button
+            onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+            className={style.pageButton}
+            disabled={currentPage === 1}
+          >
+            &lt;
+          </button>
+
           {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
             <button
               key={pageNumber}
@@ -76,6 +89,14 @@ const SearchIngredientList = ({ isLoading, ingredients, onAddIngredient }) => {
               {pageNumber}
             </button>
           ))}
+
+          <button
+            onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+            className={style.pageButton}
+            disabled={currentPage === totalPages}
+          >
+            &gt;
+          </button>
         </div>
       )}
     </div>

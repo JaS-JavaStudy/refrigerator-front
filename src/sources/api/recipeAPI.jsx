@@ -25,6 +25,10 @@ export const createRecipe = async (recipe) => {
 
 export const recipeCategory = async () => {
     const url = `${prefix}/category`;
+}
+
+export const getRecommendedRecipes = async (userPk) => {
+    const url = `${prefix}/recommend?userPk=${userPk}`;
     const res = await axios.get(url);
     return res.data;
 }

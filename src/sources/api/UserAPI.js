@@ -12,4 +12,23 @@ export const userApi = {
       throw error
     }
   },
+
+  //로그인
+  login: async (credentials) => {
+    try {
+      const formData = new FormData()
+      formData.append('username', credentials.userId)
+      formData.append('password', credentials.userPw)
+  
+      const response = await axios.post(`${BASE_URL}/login`, formData, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+  
+      return response
+    } catch (error) {
+      throw error
+    }
+  }
 }
