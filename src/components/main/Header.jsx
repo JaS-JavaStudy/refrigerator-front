@@ -14,6 +14,7 @@ function Header() {
                 <a href="/">홈</a>
                 <a href="/ingredient">내 냉장고</a>
                 <a href="/ingredient">즐겨찾기</a>
+                <a href="/login">로그인</a>
             </nav>
         </header>
     );

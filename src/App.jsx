@@ -4,6 +4,7 @@ import Ingredient from "./pages/ingredient/Ingregdient"
 import Recipe from "./pages/recipe/Recipe"
 import {AddRecipe} from "./pages/recipe/AddRecipe"
 import Join from "./pages/user/Join"
+import Login from "./pages/user/Login"
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                         <Route path='create' element={<AddRecipe/>} />
                     </Route>
                     <Route path="join" element={<Join/>} />
+                    <Route path="login" element={<Login/>} />
                 </Route>
 
             </Routes>

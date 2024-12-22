@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { userApi } from '../../sources/api/UserAPI'
 import { useNavigate } from 'react-router-dom'
-import '../../assets/css/user/Join.css'
+import styles from '../../assets/css/user/Join.module.css'
 
 const JoinForm = () => {
   const navigate = useNavigate()
@@ -116,92 +116,83 @@ const JoinForm = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group>
-        <Form.Label>아이디</Form.Label>
-        <Form.Control
+      <div className={styles.formGroup}>
+        <label className={styles.label}>아이디</label>
+        <input
+          className={styles.input}
           type="text"
           name="userId"
-          placeholder="아이디를 입력하세요."
+          placeholder="아이디를 입력하세요"
           value={formData.userId}
           onChange={handleChange}
-          isInvalid={!!errors.userId}
           disabled={isSubmitting}
         />
-        <Form.Control.Feedback type="invalid">
-          {errors.userId}
-        </Form.Control.Feedback>
-      </Form.Group>
+        {errors.userId && <span className={styles.error}>{errors.userId}</span>}
+      </div>
 
-      <Form.Group>
-        <Form.Label>비밀번호</Form.Label>
-        <Form.Control
+      <div className={styles.formGroup}>
+        <label className={styles.label}>비밀번호</label>
+        <input
+          className={styles.input}
           type="password"
           name="userPw"
-          placeholder="비밀번호를 입력하세요."
+          placeholder="비밀번호를 입력하세요"
           value={formData.userPw}
           onChange={handleChange}
-          isInvalid={!!errors.userPw}
           disabled={isSubmitting}
         />
-        <Form.Control.Feedback type="invalid">
-          {errors.userPw}
-        </Form.Control.Feedback>
-      </Form.Group>
+        {errors.userPw && <span className={styles.error}>{errors.userPw}</span>}
+      </div>
 
-      <Form.Group>
-        <Form.Label>비밀번호 확인</Form.Label>
-        <Form.Control
+      <div className={styles.formGroup}>
+        <label className={styles.label}>비밀번호 확인</label>
+        <input
+          className={styles.input}
           type="password"
           name="userPwConfirm"
-          placeholder="비밀번호를 다시 입력하세요."
+          placeholder="비밀번호를 다시 입력하세요"
           value={formData.userPwConfirm}
           onChange={handleChange}
-          isInvalid={!!errors.userPwConfirm}
           disabled={isSubmitting}
         />
-        <Form.Control.Feedback type="invalid">
-          {errors.userPwConfirm}
-        </Form.Control.Feedback>
-      </Form.Group>
+        {errors.userPwConfirm && <span className={styles.error}>{errors.userPwConfirm}</span>}
+      </div>
 
-      <Form.Group>
-        <Form.Label>이메일</Form.Label>
-        <Form.Control
+      <div className={styles.formGroup}>
+        <label className={styles.label}>이메일</label>
+        <input
+          className={styles.input}
           type="email"
           name="userEmail"
           placeholder="example@email.com"
           value={formData.userEmail}
           onChange={handleChange}
-          isInvalid={!!errors.userEmail}
           disabled={isSubmitting}
         />
-        <Form.Control.Feedback type="invalid">
-          {errors.userEmail}
-        </Form.Control.Feedback>
-      </Form.Group>
+        {errors.userEmail && <span className={styles.error}>{errors.userEmail}</span>}
+      </div>
 
-      <Form.Group>
-        <Form.Label>닉네임</Form.Label>
-        <Form.Control
+      <div className={styles.formGroup}>
+        <label className={styles.label}>닉네임</label>
+        <input
+          className={styles.input}
           type="text"
           name="userNickname"
-          placeholder="닉네임을 입력하세요."
+          placeholder="닉네임을 입력하세요"
           value={formData.userNickname}
           onChange={handleChange}
-          isInvalid={!!errors.userNickname}
           disabled={isSubmitting}
         />
-        <Form.Control.Feedback type="invalid">
-          {errors.userNickname}
-        </Form.Control.Feedback>
-      </Form.Group>
+        {errors.userNickname && <span className={styles.error}>{errors.userNickname}</span>}
+      </div>
 
-      <Button
+      <button
         type="submit"
+        className={styles.button}
         disabled={isSubmitting}
       >
         {isSubmitting ? '처리중...' : '회원가입'}
-      </Button>
+      </button>
     </Form>
   )
 }
