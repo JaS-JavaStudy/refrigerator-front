@@ -2,9 +2,8 @@ import { useEffect, useState,useCallback } from "react"
 import { getRecipeList } from "../../sources/api/recipeAPI.jsx";
 import {Link, Route, useNavigate} from "react-router-dom";
 import { AddRecipe} from "./addRecipe.jsx";
-import {Route, useNavigate} from "react-router-dom";
 import RecipeItem from "../../components/recipe/RecipeItem.jsx"
-import "../../assets/css/recipe/recipe.css"
+import style from "../../assets/css/recipe/recipe.module.css"
 
 
 function Recipe() {
@@ -31,17 +30,20 @@ function Recipe() {
         navigate("/recipe/create");
     },[navigate])
 
+    const handleRecommand = useCallback(() => {
+        navigate(`/recipe/recommend/${userPk}`);
+    },[navigate])
+
     return (
         <>
-            <h1>레시피 페이지</h1>
-            <div>
-                <button onClick={handleAdd}>레시피 추가</button>
-                <Link to={`/recipe/recommend/${userPk}`}
-                      className="ml-4 px-4 py-2 bg-blue-500 text-white rounded">
-                    맞춤 레시피 보기
-                </Link>
-            </div>
-            <div className="recipe-wrapper">
+            <h1 className={style.title}>레시피 페이지</h1>
+            <div className={style.recipewrapper}>
+                <div className={style.actions}>
+                    <input placeholder="검색" />
+                    <button onClick={handleAdd}>레시피 추가</button>
+                    <button onClick={handleRecommand}>맞춤 레시피 보기</button>
+                    <button>좋아요한 레시피 보기</button>
+                </div>
                 {recipeList.map((recipe) => (
                     <RecipeItem key={recipe.recipePk} recipe={recipe} />
                 ))}

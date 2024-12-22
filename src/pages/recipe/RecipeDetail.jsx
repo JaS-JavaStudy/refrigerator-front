@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState,useCallback } from "react"
 import { getRecipeDetail } from "../../sources/api/recipeAPI.jsx";
 import defaultRecipeImg from "../../assets/image/recipeimage.png"
-
+import style from "../../assets/css/recipe/RecipeDetail.module.css"
 
 function RecipeDetail() {
     const { recipePk } = useParams()
@@ -20,24 +20,34 @@ function RecipeDetail() {
         fetchRecipes();
     }, [recipePk]);
 
-    const recipeImage = 
+    const imgSrc = 
         recipeDetail.recipeSource && recipeDetail.recipeSource.length > 0
-            ? recipeDetail.recipeSource[0]
+            ? recipeDetail.recipeSource[0].recipeSourceSave
             : defaultRecipeImg;
 
     return (
         <>
-        <h1>레시피 상세조회 페이지</h1>
-        <div>
-            <img src={recipeImage} alt="레시피 이미지" />
-            <h3>이름:{recipeDetail.recipeName}</h3>
-            <p>내용:{recipeDetail.recipeContent}</p>
-            <p>조리시간:{recipeDetail.recipeCookingTime}(단위)</p>
-            <p>난이도:{recipeDetail.recipeDifficulty}</p>
-            <p>조회수:{recipeDetail.recipeViews}</p>
-            <p>재료</p>
-            {recipeDetail.ingredients && recipeDetail.ingredients.map(ingredient => (<p key={ingredient.ingredientPk}>{ingredient.ingredientName}</p>))}
-            <p>요리과정</p>
+        <div className={style.imgdivcontainer}>
+            <div className={style.imgdiv}>
+                <h1>{recipeDetail.recipeName}</h1>
+                <img src={`${imgSrc}`} alt="Recipe Image"/>
+            </div>
+            <div className={style.information}>
+                <div>
+                    <button>좋아요</button>
+                    <button>수정</button>
+                    <button>삭제</button>
+                </div>
+                <p>내용 {recipeDetail.recipeContent}</p>
+                <p>조리시간 {recipeDetail.recipeCookingTime}(단위)</p>
+                <p>난이도 {recipeDetail.recipeDifficulty}</p>
+                <p>조회수 {recipeDetail.recipeViews}</p>
+                <p>재료</p>
+                {recipeDetail.ingredients && recipeDetail.ingredients.map(ingredient => (<p key={ingredient.ingredientPk}>{ingredient.ingredientName}</p>))}
+            </div>
+        </div>
+        <div className={style.container}>
+            <h2>요리과정</h2>
             {recipeDetail.recipeStep && 
             recipeDetail.recipeStep.map((step, index) => (
                 <div key={step.recipeStepOrder}>
@@ -50,7 +60,6 @@ function RecipeDetail() {
                     )}
                 </div>
             ))}
-
         </div>
         </>
     )
