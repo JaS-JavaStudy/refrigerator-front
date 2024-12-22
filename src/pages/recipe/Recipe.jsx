@@ -1,11 +1,10 @@
 import { useEffect, useState,useCallback } from "react"
 import { getRecipeList } from "../../sources/api/recipeAPI.jsx";
 import {Route, useNavigate} from "react-router-dom";
-import { AddRecipe} from "./addRecipe.jsx";
-import RecipeItem from "../../components/recipe/recipeItem.jsx"
+import RecipeItem from "../../components/recipe/RecipeItem.jsx"
 import "../../assets/css/recipe/recipe.css"
 
-function Recipe() {
+function recipe() {
     const [recipeList, setRecipeList] = useState([])
     const navigate = useNavigate();
 
@@ -43,5 +42,4 @@ function Recipe() {
         </>
     )
 }
-
-export default Recipe
+export default recipe
