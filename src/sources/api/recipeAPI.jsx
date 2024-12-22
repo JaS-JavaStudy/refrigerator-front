@@ -22,3 +22,9 @@ export const createRecipe = async (recipe) => {
     const res = await axios.post(url, recipe);
     return res.data;
 }
+
+export const recipeCategory = async () => {
+    const url = `${prefix}/category`;
+    const res = await axios.get(url);
+    return res.data;
+}
