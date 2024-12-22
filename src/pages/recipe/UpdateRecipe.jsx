@@ -244,7 +244,7 @@ export const UpdateRecipe = () => {
                             const files = await convertUrlsToFiles([
                                 [
                                     step.recipeStepSource.recipeStepSourceSave,
-                                    step.recipeStepSource.recipeSourceFileName,
+                                    step.recipeStepSource.recipeStepSourceFileName,
                                 ],
                             ]);
                             return files.length > 0 ? files : null; // 변환 성공 시 파일 반환

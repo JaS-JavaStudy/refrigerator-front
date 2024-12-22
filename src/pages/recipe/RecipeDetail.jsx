@@ -54,7 +54,7 @@ function RecipeDetail() {
                     <p>Step {index + 1}: {step.recipeStepContent}</p>
                     {step.recipeStepSource && (
                         <img
-                            src={step.recipeStepSource}
+                            src={step.recipeStepSource.recipeStepSourceSave}
                             alt={`Step ${index + 1}`}
                         />
                     )}
