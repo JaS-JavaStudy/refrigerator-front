@@ -22,6 +22,9 @@
     border: 1px solid rgb(220,220,220);
     padding:10px 0px;
 }
+.actions input:focus {
+    outline: none;
+}
 .actions button{
     padding:5px;
     margin:0px 5px;

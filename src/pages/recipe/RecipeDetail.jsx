@@ -1,12 +1,27 @@
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import { useEffect, useState,useCallback } from "react"
-import { getRecipeDetail } from "../../sources/api/recipeAPI.jsx";
+import { getRecipeDetail,deleteRecipe } from "../../sources/api/recipeAPI.jsx";
 import defaultRecipeImg from "../../assets/image/recipeimage.png"
 import style from "../../assets/css/recipe/RecipeDetail.module.css"
 
 function RecipeDetail() {
     const { recipePk } = useParams()
     const [recipeDetail, setRecipeDetail] = useState({})
+    const navigate = useNavigate();
+    const toUpdate = useCallback(() => {
+        navigate(`/recipe/${recipePk}/update`);
+    },[navigate])
+    const toDelete = useCallback(() => {
+        const handleDelete = async () => {
+            try {
+                await deleteRecipe(recipePk);
+                navigate("/recipe");
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        handleDelete(); // 비동기 함수 호출
+    }, [recipePk, navigate]);
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
@@ -35,8 +50,8 @@ function RecipeDetail() {
             <div className={style.information}>
                 <div>
                     <button>좋아요</button>
-                    <button>수정</button>
-                    <button>삭제</button>
+                    <button onClick={toUpdate}>수정</button>
+                    <button onClick={toDelete}>삭제</button>
                 </div>
                 <p>내용 {recipeDetail.recipeContent}</p>
                 <p>조리시간 {recipeDetail.recipeCookingTime}(단위)</p>
