@@ -2,7 +2,7 @@
 .mainLayout {
   display: flex;
   min-height: 100vh;
-  background-color: #f0fff0;
+  background-color: #ffffff;
 }
 
 .searchSection {

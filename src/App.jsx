@@ -11,9 +11,9 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Layout/>}>
+                <Route path="/" element={<Layout />}>
                     <Route path="ingredient">
-                        <Route index element={<Ingredient/>}/>
+                        <Route index element={<Ingredient />} />
                         {/* <Route path=':ingredientMyRefrigeratorPk' element={<UsersIngredientItem/>} /> */}
                     </Route>
                     <Route path="recipe" >
@@ -22,7 +22,7 @@ function App() {
                         <Route path='recommend/:userPk' element={<RecipeRecommend/>} />
                         <Route path=':recipePk' element={<RecipeDetail/>}/>
                     </Route>
-                    <Route path="join" element={<Join/>} />
+                    <Route path="join" element={<Join />} />
                 </Route>
 
             </Routes>
