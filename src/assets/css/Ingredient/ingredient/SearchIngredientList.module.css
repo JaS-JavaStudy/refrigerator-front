@@ -1,0 +1,196 @@
+/* SearchIngredientList.module.css */
+/* 모달 관련 스타일 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.modalHeader h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.modalContent {
+  padding: 1.5rem;
+}
+
+.inputGroup {
+  margin-bottom: 1rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.modalFooter {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.confirmButton,
+.cancelButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.confirmButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cancelButton {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* 카드 관련 스타일 */
+.cardContainer {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex; /* 왼쪽 이미지, 오른쪽 텍스트 영역으로 나누기 */
+  gap: 10px;
+}
+
+.ingredientCard {
+  background: white;
+  width: 150px; /* 이미지 영역 너비 고정 */
+  height: 100px;
+  position: relative;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+.whitespace {
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+
+.statusDot {
+  position: absolute;
+  left: -6px;
+  bottom: -6px; /* 위치를 하단으로 변경 */
+  width: 24px;
+  height: 24px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  z-index: 1; /* 버튼이 다른 요소 위에 올라오도록 */
+}
+
+.textContent {
+  flex: 1; /* 남은 공간 모두 차지 */
+  display: flex;
+  flex-direction: column; /* 세로로 배치 */
+  justify-content: flex-start;
+  padding: 5px 0;
+  gap: 5px; /* 재료명과 카테고리 사이 간격 */
+}
+
+.ingredientName {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.category {
+  font-size: 14px;
+  color: #666;
+}
+
+.ingredientsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 고정적으로 2개의 컬럼 */
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* 반응형 미디어 쿼리 */
+@media (max-width: 1200px) {
+  .ingredientsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .ingredientsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 로딩 및 결과 없음 관련 스타일 */
+.loadingContainer {
+  text-align: center;
+  padding: 40px;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.noResults {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  grid-column: 1 / -1;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
