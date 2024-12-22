@@ -30,5 +30,15 @@ export const userApi = {
     } catch (error) {
       throw error
     }
-  }
+  },
+
+  // 비밀번호 재발급
+  resetPassword: async (data) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/password/reset`, data)
+      return response.data
+    } catch (error) {
+      throw error
+    }
+  },
 }

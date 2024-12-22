@@ -32,6 +32,24 @@
   padding: 0 16px;
 }
 
+.passwordReset {
+  text-align: right;
+  margin-top: 5px;
+}
+
+.resetButton {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 15px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.resetButton:hover {
+  text-decoration: underline;
+}
+
 .input:focus {
   border-color: #3FA2F6;
   background: #fff;
