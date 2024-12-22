@@ -1,8 +1,10 @@
 
 import { useState,useEffect } from 'react';
-import { createRecipe,recipeCategory } from "../../sources/api/recipeAPI.jsx";
+import {createRecipe, getRecipeDetail, recipeCategory, updateRecipe} from "../../sources/api/recipeAPI.jsx";
+import {useParams} from "react-router-dom";
 
 const initialState = {
+    recipePk: 0,
     recipeName: '',
     recipeCookingTime: 0,
     recipeDifficulty: 0,
@@ -13,8 +15,10 @@ const initialState = {
     recipeIngredients: []
 };
 
-export const AddRecipe = () => {
 
+export const UpdateRecipe = () => {
+
+    const { recipePk } = useParams()
     const [request, setRequest] = useState({ ...initialState });
 
     const [recipeSources, setRecipeSources] = useState([]);
@@ -24,13 +28,14 @@ export const AddRecipe = () => {
     const [recipeCategories, setRecipeCategories] = useState([]);
 
     const [result, setResult] = useState(null);
+    const [imageChanged,setImageChanged] = useState(false);
 
     const [ingredients, setIngredients] = useState([]); // 추가된 재료 목록
     const [ingredientInputTrue,setIngredientInputTrue] = useState("")
     const [ingredientInputFalse,setIngredientInputFalse] = useState("")
 
     const defaultUrl = "https://amzn-ap-s3-demo-bucket1-refrigerator-storage.s3.ap-southeast-2.amazonaws.com/noimage.jpg";
-    const handleClickAdd = () => {
+    const handleClickUpdate = () => {
 
         const formData = new FormData();
 
@@ -42,18 +47,17 @@ export const AddRecipe = () => {
             formData.append(`recipeSources`, file); // 같은 이름으로 서버에 전달
         });
 
+
         // recipeStepSources 추가
         recipeStepSources.forEach((files, stepIndex) => {
-            if(files) {
+            if (files && files.length > 0) { // 파일이 있는 경우만 처리
                 files.forEach(file => {
                     formData.append(`recipeStepSources`, file);
-                })
+                });
             }
         });
 
-        console.log(formData)
-
-        createRecipe(formData)
+        updateRecipe(formData)
             .then(res => {
                 console.log(res);
                 setResult(res);
@@ -72,6 +76,7 @@ export const AddRecipe = () => {
     // 파일 업로드 처리
     const handleRecipeSourcesChange = (e) => {
         setRecipeSources(Array.from(e.target.files)); // 여러 파일을 배열로 추가
+
         console.log(Array.from(e.target.files))
     };
 
@@ -156,26 +161,127 @@ export const AddRecipe = () => {
     const handleRecipeStepSourcesChange = (e, index) => {
         const files = Array.from(e.target.files||[]); // 업로드된 파일 리스트
 
+        if (files.length === 0) return;
+
         setRecipeStepSources((prevSources) => {
             const updatedSources = [...prevSources];
             updatedSources[index] = files.length > 0 ? files : null; // 파일이 있으면 업데이트, 없으면 null
             return updatedSources;
         });
+        console.log(111111)
     };
+
 
 // 카테고리 API 호출 함수
     const fetchRecipeCategories = async () => {
         try {
             const data = await recipeCategory(); // API 호출
-            setRecipeCategories(data); // 카테고리 목록 저장
+            setRecipeCategories(data);
         } catch (err) {
             console.error("카테고리 로드 실패:", err);
         }
     };
+
+    const convertUrlsToFiles = async (arrays) => { // url 받아와서 파일화..
+        try {
+            const files = await Promise.all(
+                arrays.map(async (array, index) => {
+                    const response = await fetch(array[0]); // 해당 URL에서 데이터를 가져옴
+                    if (!response.ok) { // URL 검증
+                        throw new Error(`Failed to fetch file from URL: ${array[0]}, Status: ${response.status}`);
+                    }
+                    const blob = await response.blob(); // Blob으로 변환
+                    const fileName = array[1]; // 파일 이름 설정
+                    const file = new File([blob], fileName, { type: blob.type }); // Blob을 File로 변환
+                    return file;
+                })
+            );
+            return files; // `MultiFiles` 형태와 호환 가능
+        } catch (error) {
+            console.error('Error converting URLs to files:', error);
+            return [];
+        }
+    };
+
+    const fetchRecipeDetail = async () => {
+        try {
+            const data = await getRecipeDetail(recipePk);
+
+            // 데이터를 매핑하여 request 상태로 설정
+            const mappedData = {
+                recipePk: data.recipePk || 0,
+                recipeName: data.recipeName || "",
+                recipeCookingTime: data.recipeCookingTime || 0,
+                recipeDifficulty: data.recipeDifficulty || 0,
+                recipeContent: data.recipeContent || "",
+                recipeSteps: data.recipeStep || [],
+                recipeCategoryPk: data.recipeCategory?.recipeCategoryPK || 1,
+                userPk: 1,
+                recipeIngredients: data.ingredients || [],
+            };
+
+            setRequest(mappedData); // 기본 요청 설정
+
+            // recipeSources 상태 업데이트(메인 이미지)
+            if (data.recipeSource?.length > 0) {
+                const mainImageFiles = await convertUrlsToFiles([
+                    [
+                        data.recipeSource[0].recipeSourceSave,
+                        data.recipeSource[0].recipeSourceFileName,
+                    ],
+                ]);
+                setRecipeSources(mainImageFiles);
+            } else {
+                setRecipeSources([]);
+            }
+            console.log(data)
+            // recipeStepSources 상태 업데이트(스텝별 이미지)
+            if (data.recipeStep?.length > 0) {
+                const stepFiles = await Promise.all(
+                    data.recipeStep.map(async (step) => {
+                        if (step.recipeStepSource) {
+                            // URL 배열과 파일 이름을 convertUrlsToFiles 함수에 전달
+                            const files = await convertUrlsToFiles([
+                                [
+                                    step.recipeStepSource.recipeStepSourceSave,
+                                    step.recipeStepSource.recipeSourceFileName,
+                                ],
+                            ]);
+                            return files.length > 0 ? files : null; // 변환 성공 시 파일 반환
+                        }
+                        return null; // recipeStepSource가 없는 경우 null 반환
+                    })
+                );
+
+                // 변환된 데이터로 상태 업데이트
+                setRecipeStepSources(stepFiles.map((file) => file || null));
+            } else {
+                setRecipeStepSources([]); // 스텝 이미지가 없으면 빈 배열로 설정
+            }
+
+            // 재료 데이터 매핑 및 상태 업데이트
+            const ingredientMappedData = data.ingredients.map((ingredient) => ({
+                ingredientIsNecessary: ingredient.ingredientIsNecessary === 1,
+                ingredientName: ingredient.ingredientManagement?.ingredientName || "",
+            }));
+
+            setIngredients(ingredientMappedData);
+
+            // 재료 데이터도 request에 반영
+            setRequest((prevRequest) => ({
+                ...prevRequest,
+                recipeIngredients: ingredientMappedData,
+            }));
+        } catch (err) {
+            console.error("디테일 로드 실패:", err);
+        }
+    };
+
     useEffect(() => {
         fetchRecipeCategories();
-
-    }, [ingredients]);
+        fetchRecipeDetail();
+        console.log(recipeStepSources)
+    }, []);
 
 
 
@@ -228,14 +334,14 @@ export const AddRecipe = () => {
                     // setRequest에 재료 목록 반영
                     setRequest((prevRequest) => ({
                         ...prevRequest,
-                        recipeIngredients: updatedIngredients, // recipeIngredients에 반영
+                        recipeIngredients: updatedIngredients,
                     }));
 
                     return updatedIngredients;
                 });
             }
 
-            setIngredientInputFalse(""); // 입력 필드 초기화
+            setIngredientInputFalse("");
         }
     };
 
@@ -289,7 +395,7 @@ export const AddRecipe = () => {
                 </p>
                 <button
                     className={"flex items-center"}
-                    onClick={handleClickAdd}
+                    onClick={handleClickUpdate}
                     style={{
                         height: "40px",
                         padding: "10px 20px",
@@ -327,34 +433,22 @@ export const AddRecipe = () => {
                         onChange={handleRecipeSourcesChange}
                         style={{display: "none"}}
                     />
-                    {recipeSources.length > 0 ? (
-                        <img
-                            src={URL.createObjectURL(recipeSources[0])}
-                            alt="레시피 이미지"
-                            style={{
-                                width: "100%", // 그리드 셀의 전체를 채움
-                                maxWidth: "400px", // 최대 폭 고정
-                                height: "400px", // 고정된 높이
-                                objectFit: "cover", // 유지하며 리사이즈
-                                border: "1px solid #ccc",
-                                borderRadius: "6px",
-                            }}
-                        />
-                    ) : (
-                        <img
-                            style={{
-                                width: "100%",
-                                maxWidth: "400px",
-                                height: "400px",
-                                objectFit: "contain",
-                                border: "1px dashed gray",
-                                cursor: "pointer",
-                                borderRadius: "6px",
-                            }}
-                            src={defaultUrl}
-                            alt="기본 이미지"
-                        />
-                    )}
+                    <img
+                        src={
+                            recipeSources.length > 0 && recipeSources[0]
+                                ? URL.createObjectURL(recipeSources[0]) // 정상적인 파일 객체가 있을 경우 URL 생성
+                                : defaultUrl // 기본 이미지 URL로 대체
+                        }
+                        alt="레시피 이미지"
+                        style={{
+                            width: "100%",
+                            maxWidth: "400px",
+                            height: "400px",
+                            objectFit: "cover",
+                            border: "1px solid #ccc",
+                            borderRadius: "6px",
+                        }}
+                    />
                 </label>
 
                 {/* 오른쪽: 레시피 정보 */}
@@ -442,9 +536,7 @@ export const AddRecipe = () => {
                                 width: "100%", // 정렬 유지
                             }}
                         >
-                            <option value="" disabled>
-                                카테고리를 선택하세요
-                            </option>
+
                             {recipeCategories.map((category, index) => (
                                 <option key={index} value={category.recipeCategoryPK}>
                                     {category.recipeCategory}
@@ -741,7 +833,7 @@ export const AddRecipe = () => {
                             {/* 라벨을 클릭하면 파일 창 열기 */}
                             <label htmlFor={`step-file-${index}`} style={{cursor: 'pointer'}}>
                                 <img
-                                    src={recipeStepSources[index] ? URL.createObjectURL(recipeStepSources[index][0]) : defaultUrl}
+                                    src={recipeStepSources[index] &&  recipeStepSources[index][0] ? URL.createObjectURL(recipeStepSources[index][0]) : defaultUrl}
                                     alt="스텝 이미지"
                                     style={{
                                         width: '100px',
@@ -780,3 +872,5 @@ export const AddRecipe = () => {
         </div>
     );
 };
+
+export default UpdateRecipe;
