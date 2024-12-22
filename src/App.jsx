@@ -7,6 +7,8 @@ import {AddRecipe} from "./pages/recipe/AddRecipe"
 import Join from "./pages/user/Join"
 import Login from "./pages/user/Login"
 import RecipeRecommend from "./pages/recipe/RecipeRecommend"
+import Logout from "./components/user/Logout"
+import PublicOnlyRoute from "./components/auth/PublicOnlyRoute"
 import RecipeRandom from "./pages/recipe/RecipeRandom"
 
 function App() {
@@ -25,8 +27,9 @@ function App() {
                         <Route path=':recipePk' element={<RecipeDetail/>}/>
                         <Route path='random' element={<RecipeRandom/>}/>
                     </Route>
-                    <Route path="join" element={<Join/>} />
-                    <Route path="login" element={<Login/>} />
+                    <Route path="join" element={<PublicOnlyRoute><Join/></PublicOnlyRoute>} />
+                    <Route path="login" element={<PublicOnlyRoute><Login/></PublicOnlyRoute>} />
+                    <Route path="logout" element={<Logout/>} />
                 </Route>
 
             </Routes>
