@@ -1,3 +1,4 @@
+// UserIngredient.jsx
 import { useEffect, useState } from "react";
 import { getUsersIngredient } from "../../../sources/api/IngredientAPI";
 import UsersIngredientItem from "./UsersIngredientItem";
@@ -8,6 +9,8 @@ function UserIngredient() {
     const [filteredIngredients, setFilteredIngredients] = useState([]);
     const [category, setCategory] = useState("전체");
     const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 9; // 페이지당 9개 아이템
 
     const categories = [
         "전체", "채소", "과일", "육류", "해산물", "유제품",
@@ -59,7 +62,24 @@ function UserIngredient() {
         }
 
         setFilteredIngredients(filtered);
+        setCurrentPage(1); // 필터링이 변경될 때 첫 페이지로 리셋
     }, [category, showFavoritesOnly, usersIngredientList]);
+
+    // 현재 페이지의 아이템들을 가져오는 함수
+    const getCurrentItems = () => {
+        const indexOfLastItem = currentPage * itemsPerPage;
+        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+        return filteredIngredients.slice(indexOfFirstItem, indexOfLastItem);
+    };
+
+    // 페이지 변경 핸들러
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // 전체 페이지 수 계산
+    const totalPages = Math.ceil(filteredIngredients.length / itemsPerPage);
 
     return (
         <div className={style.container}>
@@ -86,13 +106,44 @@ function UserIngredient() {
                 </div>
             </div>
             <div className={style.cardContainer}>
-                {filteredIngredients.map((ingredient) => (
+                {getCurrentItems().map((ingredient) => (
                     <UsersIngredientItem
                         key={ingredient.ingredientMyRefrigeratorPk}
                         userIngredient={ingredient}
                     />
                 ))}
             </div>
+
+            {/* 페이지네이션 */}
+            {filteredIngredients.length > itemsPerPage && (
+                <div className={style.pagination}>
+                    <button
+                        onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                        className={style.pageButton}
+                        disabled={currentPage === 1}
+                    >
+                        &lt;
+                    </button>
+
+                    {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                        <button
+                            key={pageNumber}
+                            onClick={() => handlePageChange(pageNumber)}
+                            className={`${style.pageButton} ${currentPage === pageNumber ? style.activePage : ''}`}
+                        >
+                            {pageNumber}
+                        </button>
+                    ))}
+
+                    <button
+                        onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                        className={style.pageButton}
+                        disabled={currentPage === totalPages}
+                    >
+                        &gt;
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
