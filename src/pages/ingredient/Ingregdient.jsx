@@ -1,16 +1,18 @@
+// Ingredient.jsx
 import UsersIngredient from "../../components/ingredient/userIngredient/UsersIngredient"
+import SearchIngredient from "../../components/ingredient/searchIngredient/SearchIngredient";
 import style from '../../assets/css/ingredient/ingredient/Ingredient.module.css'
 
-
 function Ingredient() {
-    console.log(style);
     return (
-        <>
-            <h1>재료 페이지</h1>
-            <div className={style.userIngredient}>
+        <main className={style.mainLayout}>
+            <div className={style.searchSection}>
+                <SearchIngredient />
+            </div>
+            <div className={style.refrigeratorSection}>
                 <UsersIngredient />
             </div>
-        </>
+        </main>
     )
 }
 

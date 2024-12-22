@@ -2,6 +2,10 @@ import { useEffect, useState,useCallback } from "react"
 import { getRecipeList } from "../../sources/api/recipeAPI.jsx";
 import {Link, Route, useNavigate} from "react-router-dom";
 import { AddRecipe} from "./addRecipe.jsx";
+import {Route, useNavigate} from "react-router-dom";
+import RecipeItem from "../../components/recipe/RecipeItem.jsx"
+import "../../assets/css/recipe/recipe.css"
+
 
 function Recipe() {
     const [recipeList, setRecipeList] = useState([])
@@ -13,8 +17,8 @@ function Recipe() {
         const fetchRecipes = async () => {
             try {
                 const data = await getRecipeList();
-                setRecipeList(data); 
-                console.log(recipeList); 
+                console.log("recipeList",data); // 가져온 데이터 확인
+                setRecipeList(data); // 상태 업데이트
             } catch (err) {
                 console.error(err);
             }
@@ -37,8 +41,13 @@ function Recipe() {
                     맞춤 레시피 보기
                 </Link>
             </div>
+            <div className="recipe-wrapper">
+                {recipeList.map((recipe) => (
+                    <RecipeItem key={recipe.recipePk} recipe={recipe} />
+                ))}
+            </div>
+
         </>
     )
 }
-
 export default Recipe

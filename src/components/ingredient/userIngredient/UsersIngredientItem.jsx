@@ -1,61 +1,87 @@
+// UsersIngredientItem.jsx
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import style from '../../../assets/css/Ingredient/userIngredient/UsersIngredientItem.module.css';
 import React, { useState } from 'react';
-import { updateIngredientBookmark } from '../../../sources/api/IngredientAPI';
+import { updateIngredientBookmark, deleteIngredient } from '../../../sources/api/IngredientAPI';
+import UseIngredientModal from '../modal/UseIngredientModal';
 
 function UsersIngredientItem({ userIngredient }) {
     const [isBookmarked, setIsBookmarked] = useState(userIngredient.bookmarked || false);
+    const [showModal, setShowModal] = useState(false);
 
     const toggleBookmark = () => {
         const newBookmarkState = !isBookmarked;
-        setIsBookmarked(newBookmarkState); // 즐겨찾기 상태 업데이트
-        
-
-        // 서버로 상태 업데이트 (필요시)
-        updateIngredientBookmark(1, isBookmarked, userIngredient)
-        userIngredient.bookmarked = !userIngredient.bookmarked
+        setIsBookmarked(newBookmarkState);
+        updateIngredientBookmark(1, isBookmarked, userIngredient);
+        userIngredient.bookmarked = !userIngredient.bookmarked;
     };
 
-    console.log(userIngredient);
+    // UsersIngredientItem.jsx의 handleUse 함수 수정
+    const handleUse = async (amount) => {
+        try {
+            console.log('사용 요청:', {
+                pk: userIngredient.ingredientMyRefrigeratorPk,
+                amount: amount,
+                현재수량: userIngredient.ingredientAmount
+            });
+            await deleteIngredient(userIngredient.ingredientMyRefrigeratorPk, amount);
+            setShowModal(false);
+            window.dispatchEvent(new Event('ingredientAdded'));
+        } catch (error) {
+            console.error('재료 사용 중 에러:', error.response?.data || error.message);
+            alert(`재료 사용에 실패했습니다. ${error.response?.data || ''}`);
+        }
+    };
+
     return (
-        <Card className={style.card}>
-            <div className={style.imageWrapper}>
-                <img
-                    src={userIngredient.image || 'https://cdn.mindgil.com/news/photo/202211/75510_16178_5715.jpg'}
-                    alt={userIngredient.ingredientName}
-                    className={style.image}
-                />
-                <div className={style.favoriteAndQuantity}>
-                    <button
-                        className={`${style.favoriteButton} ${isBookmarked ? style.active : ''}`} // 즐겨찾기 상태에 따른 스타일
-                        onClick={toggleBookmark}
-                    >
-                        {isBookmarked ? '⭐' : '☆'} {/* 상태에 따른 아이콘 */}
-                    </button>
-                    <div className={style.quantity}>
-                        수량: {userIngredient.ingredientAmount || 0}
+        <>
+            <Card className={style.card}>
+                <div className={style.imageWrapper}>
+                    <img
+                        src={userIngredient.image || 'https://cdn.mindgil.com/news/photo/202211/75510_16178_5715.jpg'}
+                        alt={userIngredient.ingredientName}
+                        className={style.image}
+                    />
+                    <div className={style.favoriteAndQuantity}>
+                        <button
+                            className={`${style.favoriteButton} ${isBookmarked ? style.active : ''}`}
+                            onClick={toggleBookmark}
+                        >
+                            {isBookmarked ? '⭐' : '☆'}
+                        </button>
+                        <div className={style.quantity}>
+                            수량: {userIngredient.ingredientAmount || 0}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Card.Body className={style.body}>
-                <Card.Title className={style.title}>
-                    {userIngredient.ingredientName || '재료명'}
-                </Card.Title>
-                <Card.Text className={style.details}>
-                    <div><strong>유통기한:</strong> {userIngredient.expirationDate || '알 수 없음'}</div>
-                    <div><strong>남은 일수:</strong> {userIngredient.remainExpirationDate || 0}</div>
-                    <div><strong>보관 방법:</strong> {userIngredient.ingredientStorage || '보관 방법 미정'}</div>
-                </Card.Text>
-                <Button
-                    variant="success"
-                    className={style.useButton}
-                    onClick={() => console.log(`${userIngredient.ingredientName} 사용하기 클릭됨`)}
-                >
-                    사용하기
-                </Button>
-            </Card.Body>
-        </Card>
+                <Card.Body className={style.body}>
+                    <Card.Title className={style.title}>
+                        {userIngredient.ingredientName || '재료명'}
+                    </Card.Title>
+                    <div className={style.details}>
+                        <div><strong>유통기한:</strong> {userIngredient.expirationDate || '알 수 없음'}</div>
+                        <div><strong>남은 일수:</strong> {userIngredient.remainExpirationDate || 0}일</div>
+                        <div><strong>보관 방법:</strong> {userIngredient.ingredientStorage || '보관 방법 미정'}</div>
+                    </div>
+                    <Button
+                        variant="success"
+                        className={style.useButton}
+                        onClick={() => setShowModal(true)}
+                    >
+                        사용하기
+                    </Button>
+                </Card.Body>
+            </Card>
+
+            {showModal && (
+                <UseIngredientModal
+                    ingredient={userIngredient}
+                    onClose={() => setShowModal(false)}
+                    onConfirm={handleUse}
+                />
+            )}
+        </>
     );
 }
 

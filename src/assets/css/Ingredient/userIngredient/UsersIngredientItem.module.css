@@ -1,102 +1,101 @@
+/* UsersIngredientItem.module.css */
 .card {
-    width: 260px; /* 가로 길이 */
-    height: auto; /* 세로 길이 자동 조정 */
-    background-color: #ffffff; /* 카드 배경 */
-    padding: 0.5rem; /* 내부 여백 최소화 */
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* 상단, 중단, 하단 영역 분리 */
-    text-align: left;
-    position: relative; /* 전체 카드 내부 배치 */
-    transition: all 0.3s ease;
+  width: 260px;
+  height: auto;
+  background-color: #ffffff;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.card img {
-    border-radius: 10px;
-    height: 120px; /* 이미지 높이 */
-    width: 100%;
-    object-fit: cover; /* 이미지 비율 유지 */
-    margin-bottom: 0; /* 이미지와 텍스트 간격 제거 */
+.imageWrapper {
+  position: relative;
 }
 
-/* 즐겨찾기 버튼과 수량 영역 */
+.image {
+  border-radius: 10px;
+  height: 120px;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
 .favoriteAndQuantity {
-    display: flex;
-    justify-content: space-between; /* 좌우로 배치 */
-    align-items: center;
-    margin-top: -30px; /* 이미지와 겹치도록 조정 */
-    padding: 0; /* 좌우 여백 제거 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -30px;
+  padding: 0;
 }
 
 .favoriteButton {
-    display: flex; /* Flexbox로 내부 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
-    justify-content: center; /* 가로 가운데 정렬 */
-    background-color: rgba(207, 205, 205, 0.7); /* 반투명 배경 */
-    border: none;
-    font-size: 0.9rem; /* 별 크기 조정 */
-    cursor: pointer;
-    border-radius: 50%; /* 버튼을 동그랗게 */
-    width: 1.5rem; /* 버튼 너비 */
-    height: 1.5rem; /* 버튼 높이 */
-    padding: 0; /* 내부 여백 제거 */
-    margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(207, 205, 205, 0.7);
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  margin-top: 2px;
 }
 
 .favoriteButton:hover {
-    background-color: rgb(66, 55, 55)/* Hover 시 색상 변경 */
+  background-color: rgb(66, 55, 55);
 }
 
-
-
-/* 수량 표시 */
 .quantity {
-    background-color: rgba(207, 205, 205, 0.7); /* 반투명 배경 */
-    color: black;
-    padding: 0.2rem 0.4rem; /* 여백 조정 */
-    border-radius: 5px;
-    font-size: 0.85rem; /* 텍스트 크기 조정 */
-}
-
-/* 카드 텍스트 섹션 */
-.details {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 0.1rem; /* 텍스트 간격 최소화 */
-    line-height: 1.4;
-}
-
-.details strong {
-    color: #333;
-    font-weight: bold;
+  background-color: rgba(207, 205, 205, 0.7);
+  color: black;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
 }
 
 .title {
-    font-size: 1rem;
-    font-weight: bold;
-    margin: 0.2rem 0; /* 이미지와 이름 간격 최소화 */
-    text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0.2rem 0;
+  text-align: center;
 }
 
-/* 사용하기 버튼 */
+.details {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.1rem;
+  line-height: 1.4;
+}
+
+.details strong {
+  color: #333;
+  font-weight: bold;
+}
+
 .useButton {
-    align-self: flex-end; /* 오른쪽 정렬 */
-    background-color: rgba(207, 205, 205, 1);
-    color: black;
-    font-weight: 500;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    position: absolute; /* 오른쪽 하단 고정 */
-    bottom: 10px;
-    right: 10px;
-    z-index: 5; /* 다른 요소와 겹치지 않도록 */
+  align-self: flex-end;
+  background-color: rgba(207, 205, 205, 1);
+  color: black;
+  font-weight: 500;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 5;
 }
 
 .useButton:hover {
-    background-color: rgb(179, 178, 178);
+  background-color: rgb(179, 178, 178);
 }
