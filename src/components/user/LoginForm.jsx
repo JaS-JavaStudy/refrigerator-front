@@ -36,7 +36,7 @@ const LoginForm = ({ onPasswordReset }) => {
         localStorage.setItem('token', token.split(' ')[1])  // "Bearer " 제거
       }
       console.log(token)
-      navigate('/')  // 로그인 성공 시 홈으로 이동
+      window.location.href = '/'  // 로그인 성공 시 페이지 새로고침 하면서 이동
     } catch (error) {
       setError('아이디 또는 비밀번호가 올바르지 않습니다.')
     } finally {

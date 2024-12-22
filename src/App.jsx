@@ -7,6 +7,8 @@ import {AddRecipe} from "./pages/recipe/AddRecipe"
 import Join from "./pages/user/Join"
 import Login from "./pages/user/Login"
 import RecipeRecommend from "./pages/recipe/RecipeRecommend"
+import Logout from "./components/user/Logout"
+import PublicOnlyRoute from "./components/auth/PublicOnlyRoute"
 
 function App() {
     return (
@@ -23,8 +25,9 @@ function App() {
                         <Route path='recommend/:userPk' element={<RecipeRecommend/>} />
                         <Route path=':recipePk' element={<RecipeDetail/>}/>
                     </Route>
-                    <Route path="join" element={<Join/>} />
-                    <Route path="login" element={<Login/>} />
+                    <Route path="join" element={<PublicOnlyRoute><Join/></PublicOnlyRoute>} />
+                    <Route path="login" element={<PublicOnlyRoute><Login/></PublicOnlyRoute>} />
+                    <Route path="logout" element={<Logout/>} />
                 </Route>
 
             </Routes>
