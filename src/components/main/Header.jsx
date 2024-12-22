@@ -13,6 +13,7 @@ function Header() {
             <nav className={style.nav}>
                 <a href="/">홈</a>
                 <a href="/ingredient">내 냉장고</a>
+                <a href="/recipe">레시피</a>
                 <a href="/ingredient">즐겨찾기</a>
             </nav>
         </header>

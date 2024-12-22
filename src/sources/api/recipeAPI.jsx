@@ -16,3 +16,9 @@ export const createRecipe = async (recipe) => {
     const res = await axios.post(url, recipe);
     return res.data;
 }
+
+export const getRecommendedRecipes = async (userPk) => {
+    const url = `${prefix}/recommend?userPk=${userPk}`;
+    const res = await axios.get(url);
+    return res.data;
+}
