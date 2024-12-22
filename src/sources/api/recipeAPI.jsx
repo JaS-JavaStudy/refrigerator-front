@@ -41,3 +41,8 @@ export const updateRecipe = async (recipe) => {
     return res.data;
 
 }
+
+export const deleteRecipe = async (recipePk) => {
+    const url = `${prefix}`;
+    const res = await axios.delete(url,{ params : {recipePk} });
+}
