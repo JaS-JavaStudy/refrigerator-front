@@ -81,35 +81,39 @@
 
 /* 카드 관련 스타일 */
 .cardContainer {
+  background-color: white;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 10px;
-  display: flex; /* 왼쪽 이미지, 오른쪽 텍스트 영역으로 나누기 */
+  display: flex; /* 수평 배치 */
   gap: 10px;
+  width: 100%; /* 전체 너비 사용 */
+  height: 120px; /* 카드 높이 고정 */
 }
 
 .ingredientCard {
-  background: white;
-  width: 150px; /* 이미지 영역 너비 고정 */
-  height: 100px;
   position: relative;
-  border: 1px solid #e0e0e0;
+  width: 150px; /* 이미지 영역 너비 고정 */
+  height: 90px;
   border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0; /* 이미지 영역 크기 고정 */
 }
 
-.whitespace {
+.ingredientImage {
   width: 100%;
   height: 100%;
-  background: white;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .statusDot {
   position: absolute;
-  left: -6px;
-  bottom: -6px; /* 위치를 하단으로 변경 */
+  left: 1px;
+  bottom: 2px;
   width: 24px;
   height: 24px;
-  background-color: #4caf50;
+  background-color: rgba(139, 226, 38, 0.912);
   border-radius: 50%;
   border: none;
   color: white;
@@ -120,16 +124,21 @@
   cursor: pointer;
   padding: 0;
   line-height: 1;
-  z-index: 1; /* 버튼이 다른 요소 위에 올라오도록 */
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.statusDot:hover {
+  background-color: rgba(112, 182, 30, 0.912);
+  color: white;
 }
 
 .textContent {
-  flex: 1; /* 남은 공간 모두 차지 */
+  flex: 1;
   display: flex;
-  flex-direction: column; /* 세로로 배치 */
-  justify-content: flex-start;
-  padding: 5px 0;
-  gap: 5px; /* 재료명과 카테고리 사이 간격 */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
 }
 
 .ingredientName {
@@ -145,9 +154,10 @@
 
 .ingredientsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 고정적으로 2개의 컬럼 */
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   padding: 1rem;
+  min-height: 600px;
 }
 
 /* 반응형 미디어 쿼리 */
@@ -192,5 +202,73 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+/* 페이지네이션 컨테이너 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+/* 페이지 버튼 기본 스타일 */
+.pageButton {
+  min-width: 36px;
+  height: 36px;
+  border: 1px solid #e0e0e0;
+  background-color: white;
+  border-radius: 6px;
+  color: #666;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 호버 효과 */
+.pageButton:hover {
+  background-color: #f5f5f5;
+  border-color: #d0d0d0;
+  color: #333;
+}
+
+/* 활성화된 페이지 버튼 */
+.activePage {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: white;
+  font-weight: 500;
+}
+
+/* 활성화된 버튼 호버 효과 */
+.activePage:hover {
+  background-color: #45a049;
+  border-color: #45a049;
+  color: white;
+}
+
+/* 비활성화된 버튼 (선택사항) */
+.pageButton:disabled {
+  background-color: #f5f5f5;
+  border-color: #e0e0e0;
+  color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+  .pagination {
+    gap: 4px;
+  }
+
+  .pageButton {
+    min-width: 32px;
+    height: 32px;
+    font-size: 13px;
   }
 }
