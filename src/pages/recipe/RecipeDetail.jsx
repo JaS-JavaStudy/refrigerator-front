@@ -22,7 +22,7 @@ function RecipeDetail() {
 
     const recipeImage = 
         recipeDetail.recipeSource && recipeDetail.recipeSource.length > 0
-            ? recipeDetail.recipeSource[0]
+            ? recipeDetail.recipeSource[0]?.recipeSourceSave
             : defaultRecipeImg;
 
     return (
@@ -36,11 +36,11 @@ function RecipeDetail() {
             <p>난이도:{recipeDetail.recipeDifficulty}</p>
             <p>조회수:{recipeDetail.recipeViews}</p>
             <p>재료</p>
-            {recipeDetail.ingredients && recipeDetail.ingredients.map(ingredient => (<p key={ingredient.ingredientPk}>{ingredient.ingredientName}</p>))}
+            {recipeDetail.ingredients && recipeDetail.ingredients.map(ingredient => (<p key={ingredient?.ingredientManagement.ingredientManagementPk}>{ingredient.ingredientManagement.ingredientName}</p>))}
             <p>요리과정</p>
-            {recipeDetail.recipeStep && 
+            {recipeDetail.recipeStep &&
             recipeDetail.recipeStep.map((step, index) => (
-                <div key={step.recipeStepOrder}>
+                <div key={step?.recipeStepOrder}>
                     <p>Step {index + 1}: {step.recipeStepContent}</p>
                     {step.recipeStepSource && (
                         <img

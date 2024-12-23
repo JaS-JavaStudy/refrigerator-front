@@ -7,6 +7,7 @@ import {AddRecipe} from "./pages/recipe/AddRecipe"
 import Join from "./pages/user/Join"
 import Login from "./pages/user/Login"
 import RecipeRecommend from "./pages/recipe/RecipeRecommend"
+import {UpdateRecipe} from "./pages/recipe/UpdateRecipe.jsx"
 import Logout from "./components/user/Logout"
 import PublicOnlyRoute from "./components/auth/PublicOnlyRoute"
 import RecipeRandom from "./pages/recipe/RecipeRandom"
@@ -25,6 +26,7 @@ function App() {
                         <Route path='create' element={<AddRecipe/>} />
                         <Route path='recommend/:userPk' element={<RecipeRecommend/>} />
                         <Route path=':recipePk' element={<RecipeDetail/>}/>
+                        <Route path=':recipePk/update' element={<UpdateRecipe/>} />
                         <Route path='random' element={<RecipeRandom/>}/>
                     </Route>
                     <Route path="join" element={<PublicOnlyRoute><Join/></PublicOnlyRoute>} />
