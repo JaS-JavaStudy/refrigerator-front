@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { userApi } from '../../sources/api/UserAPI'
 import { useNavigate } from 'react-router-dom'
 import styles from '../../assets/css/user/Login.module.css'
 
-const LoginForm = () => {
+const LoginForm = ({ onPasswordReset }) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     userId: '',
@@ -36,7 +36,7 @@ const LoginForm = () => {
         localStorage.setItem('token', token.split(' ')[1])  // "Bearer " 제거
       }
       console.log(token)
-      navigate('/')  // 로그인 성공 시 홈으로 이동
+      window.location.href = '/'  // 로그인 성공 시 페이지 새로고침 하면서 이동
     } catch (error) {
       setError('아이디 또는 비밀번호가 올바르지 않습니다.')
     } finally {
@@ -79,6 +79,16 @@ const LoginForm = () => {
         >
         {isSubmitting ? '로그인 중...' : '로그인'}
       </button>
+
+      <div className={styles.passwordReset}>
+        <button
+          type="button"
+          onClick={onPasswordReset}
+          className={styles.resetButton}
+        >
+          비밀번호 찾기
+        </button>
+      </div>
       
       {error && <div className={styles.errorMessage}>{error}</div>}
     </Form>
