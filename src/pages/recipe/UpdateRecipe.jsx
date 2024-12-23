@@ -1,13 +1,14 @@
 
 import { useState,useEffect } from 'react';
 import {
-    createRecipe,
+    getUserPk,
     deleteRecipe,
     getRecipeDetail,
     recipeCategory,
     updateRecipe
 } from "../../sources/api/recipeAPI.jsx";
 import {useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const initialState = {
     recipePk: 0,
@@ -23,7 +24,7 @@ const initialState = {
 
 
 export const UpdateRecipe = () => {
-
+    const navigate = useNavigate();
     const { recipePk } = useParams()
     const [request, setRequest] = useState({ ...initialState });
 
@@ -44,9 +45,15 @@ export const UpdateRecipe = () => {
     const handleClickUpdate = () => {
 
         const formData = new FormData();
+        const userPk = getUserPk();
+        if (!userPk) {
+            console.error("User Token is invalid or missing.");
+            return; // UserPk가 없을 시 요청을 중단
+        }// request 기본 글은 그냥 추가
 
-        // request 기본 글은 그냥 추가
-        formData.append("request",new Blob([JSON.stringify(request)],{type:"application/json"}));
+        const updatedRequest = { ...request, recipeUserPk: userPk };
+
+        formData.append("request",new Blob([JSON.stringify(updatedRequest)],{type:"application/json"}));
 
         // recipeSources 파일 배열 추가 (메인 이미지)
         recipeSources.forEach((file) => {
@@ -72,6 +79,7 @@ export const UpdateRecipe = () => {
                 setRecipeSources([]);
                 setRecipeStepSources([]);
                 setIngredients([]);
+                navigate("/recipe")
             })
             .catch(err => {
                 console.log(err);
