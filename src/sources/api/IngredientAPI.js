@@ -2,6 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/ingredient";
 
+
 function getUserPkFromToken(token) {
   try {
     const payload = token.split(".")[1]; // 토큰의 payload 부분
@@ -12,7 +13,6 @@ function getUserPkFromToken(token) {
     return null;
   }
 }
-
 
 export async function getAllIngredients() {
   try {
