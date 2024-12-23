@@ -1,7 +1,8 @@
 
 import { useState,useEffect } from 'react';
-import { createRecipe,recipeCategory } from "../../sources/api/recipeAPI.jsx";
-import { useNavigate } from 'react-router-dom';
+import { getUserPk,createRecipe,recipeCategory } from "../../sources/api/recipeAPI.jsx";
+
+import { useNavigate } from 'react-router-dom'
 
 const initialState = {
     recipeName: '',
@@ -15,6 +16,7 @@ const initialState = {
 };
 
 export const AddRecipe = () => {
+    const navigate = useNavigate()
 
     const [request, setRequest] = useState({ ...initialState });
 
@@ -35,9 +37,15 @@ export const AddRecipe = () => {
     const handleClickAdd = () => {
 
         const formData = new FormData();
+        const userPk = getUserPk();
+        if (!userPk) {
+            console.error("User Token is invalid or missing.");
+            return; // UserPk가 없을 시 요청을 중단
+        }// request 기본 글은 그냥 추가
 
-        // request 기본 글은 그냥 추가
-        formData.append("request",new Blob([JSON.stringify(request)],{type:"application/json"}));
+        const updatedRequest = { ...request, recipeUserPk: userPk };
+
+        formData.append("request",new Blob([JSON.stringify(updatedRequest)],{type:"application/json"}));
 
         // recipeSources 파일 배열 추가
         recipeSources.forEach(file => {
@@ -53,6 +61,7 @@ export const AddRecipe = () => {
             }
         });
 
+
         console.log(formData)
 
         createRecipe(formData)
@@ -61,12 +70,16 @@ export const AddRecipe = () => {
                 console.log(res);
                 setResult(res);
 
+
                 // 사용 후 초기화
                 setRequest({ ...initialState });
                 setRecipeSources([]);
                 setRecipeStepSources([]);
                 setIngredients([]);
+
+                navigate('/recipe')
             })
+
             .catch(err => {
                 console.log(err);
             });
@@ -175,6 +188,8 @@ export const AddRecipe = () => {
             console.error("카테고리 로드 실패:", err);
         }
     };
+
+
     useEffect(() => {
         fetchRecipeCategories();
 
