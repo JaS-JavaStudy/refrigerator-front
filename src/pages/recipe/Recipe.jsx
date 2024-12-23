@@ -1,7 +1,7 @@
 import { useEffect, useState,useCallback } from "react"
 import { getRecipeList } from "../../sources/api/recipeAPI.jsx";
 import {Link, Route, useNavigate} from "react-router-dom";
-import { AddRecipe} from "./addRecipe.jsx";
+import { AddRecipe} from "./AddRecipe.jsx";
 import RecipeItem from "../../components/recipe/RecipeItem.jsx"
 import style from "../../assets/css/recipe/recipe.module.css"
 

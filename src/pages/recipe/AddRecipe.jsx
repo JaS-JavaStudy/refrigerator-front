@@ -1,7 +1,6 @@
 
 import { useState,useEffect } from 'react';
 import { getUserPk,createRecipe,recipeCategory } from "../../sources/api/recipeAPI.jsx";
-
 import { useNavigate } from 'react-router-dom'
 
 const initialState = {
@@ -31,7 +30,7 @@ export const AddRecipe = () => {
     const [ingredients, setIngredients] = useState([]); // 추가된 재료 목록
     const [ingredientInputTrue,setIngredientInputTrue] = useState("")
     const [ingredientInputFalse,setIngredientInputFalse] = useState("")
-    const navigate = useNavigate();
+
 
     const defaultUrl = "https://amzn-ap-s3-demo-bucket1-refrigerator-storage.s3.ap-southeast-2.amazonaws.com/noimage.jpg";
     const handleClickAdd = () => {
