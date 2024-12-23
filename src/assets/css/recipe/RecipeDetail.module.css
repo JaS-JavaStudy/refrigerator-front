@@ -36,6 +36,7 @@
 }
 
 .container {
+    text-align: center;
     padding: 40px 50px;
     border: 1px solid rgb(220,220,220);
     border-radius: 10px;
@@ -43,6 +44,7 @@
     margin:0px auto;
     margin-bottom: 50px;
 }
-.container p {
-    text-align: left;
+.container h2 {
+    margin-bottom:30px;
 }
+

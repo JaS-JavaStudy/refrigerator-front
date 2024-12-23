@@ -43,6 +43,9 @@ function Recipe() {
     const handleRecommand = useCallback(() => {
         navigate(`/recipe/recommend/${userPk}`);
     },[navigate])
+    const handleLike = useCallback(() => {
+        navigate(`/recipe/liked/${userPk}`);
+    },[navigate])
     return (
         <>
             <h1 className={style.title}>레시피 페이지</h1>
@@ -51,7 +54,7 @@ function Recipe() {
                     <input value={search} onChange={onChangeSearch} placeholder="검색" />
                     <button onClick={handleAdd}>레시피 추가</button>
                     <button onClick={handleRecommand}>맞춤 레시피 보기</button>
-                    <button>좋아요한 레시피 보기</button>
+                    <button onClick={handleLike} >좋아요한 레시피 보기</button>
                 </div>
                 {filteredRecipeList.map((recipe) => (
                     <RecipeItem key={recipe.recipePk} recipe={recipe} />

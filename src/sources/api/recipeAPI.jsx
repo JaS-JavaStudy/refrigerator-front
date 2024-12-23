@@ -41,6 +41,12 @@ export const getRecommendedRecipes = async (userPk) => {
     return res.data;
 }
 
+export const getLikedRecipes = async (userPk) => {
+    const url = `${prefix}/liked?userPk=${userPk}`;
+    const res = await axios.get(url);
+    return res.data
+}
+
 export const updateRecipe = async (recipe) => {
     const url = `${prefix}`;
     const res = await axios.put(url,recipe);

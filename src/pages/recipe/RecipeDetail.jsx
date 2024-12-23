@@ -54,7 +54,7 @@ function RecipeDetail() {
                     <button onClick={toDelete}>삭제</button>
                 </div>
                 <p>내용 {recipeDetail.recipeContent}</p>
-                <p>조리시간 {recipeDetail.recipeCookingTime}(단위)</p>
+                <p>조리시간 {recipeDetail.recipeCookingTime}분</p>
                 <p>난이도 {recipeDetail.recipeDifficulty}</p>
                 <p>조회수 {recipeDetail.recipeViews}</p>
                 <p>재료</p>

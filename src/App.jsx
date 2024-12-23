@@ -8,6 +8,7 @@ import Join from "./pages/user/Join"
 import Login from "./pages/user/Login"
 import RecipeRecommend from "./pages/recipe/RecipeRecommend"
 import {UpdateRecipe} from "./pages/recipe/UpdateRecipe.jsx"
+import RecipeLiked from "./pages/recipe/RecipeLiked.jsx"
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     </Route>
                     <Route path="recipe" >
                         <Route index element={<Recipe/>} />
+                        <Route path='liked/:userPk' element={<RecipeLiked/>} />
                         <Route path='create' element={<AddRecipe/>} />
                         <Route path='recommend/:userPk' element={<RecipeRecommend/>} />
                         <Route path=':recipePk' element={<RecipeDetail/>}/>
