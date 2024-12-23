@@ -45,6 +45,8 @@ export const updateRecipe = async (recipe) => {
 export const deleteRecipe = async (recipePk) => {
     const url = `${prefix}`;
     const res = await axios.delete(url,{ params : {recipePk} });
+}
+
 export const getRandomRecipe = async () => {
     const url = `${prefix}/random`;
     const res = await axios.get(url);
