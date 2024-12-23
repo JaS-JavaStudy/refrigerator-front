@@ -1,6 +1,12 @@
 
 import { useState,useEffect } from 'react';
-import {createRecipe, getRecipeDetail, recipeCategory, updateRecipe} from "../../sources/api/recipeAPI.jsx";
+import {
+    createRecipe,
+    deleteRecipe,
+    getRecipeDetail,
+    recipeCategory,
+    updateRecipe
+} from "../../sources/api/recipeAPI.jsx";
 import {useParams} from "react-router-dom";
 
 const initialState = {
@@ -72,6 +78,12 @@ export const UpdateRecipe = () => {
                 console.log(err);
             });
     };
+    const handleClickDelete = () => {
+        deleteRecipe(recipePk)
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     // 파일 업로드 처리
     const handleRecipeSourcesChange = (e) => {
@@ -168,7 +180,6 @@ export const UpdateRecipe = () => {
             updatedSources[index] = files.length > 0 ? files : null; // 파일이 있으면 업데이트, 없으면 null
             return updatedSources;
         });
-        console.log(111111)
     };
 
 
@@ -186,12 +197,15 @@ export const UpdateRecipe = () => {
         try {
             const files = await Promise.all(
                 arrays.map(async (array, index) => {
-                    const response = await fetch(array[0]); // 해당 URL에서 데이터를 가져옴
-                    if (!response.ok) { // URL 검증
-                        throw new Error(`Failed to fetch file from URL: ${array[0]}, Status: ${response.status}`);
+
+                    const [url, fileName] = array;
+                    if (!url || !fileName) { // URL 또는 fileName이 없는 경우 경고 및 무시
+                        console.warn("Invalid URL or fileName:", { url, fileName });
+                        return null;
                     }
+
+                    const response = await fetch(url); // 해당 URL에서 데이터를 가져옴
                     const blob = await response.blob(); // Blob으로 변환
-                    const fileName = array[1]; // 파일 이름 설정
                     const file = new File([blob], fileName, { type: blob.type }); // Blob을 File로 변환
                     return file;
                 })
@@ -393,25 +407,47 @@ export const UpdateRecipe = () => {
                 >
                     Recipe
                 </p>
-                <button
-                    className={"flex items-center"}
-                    onClick={handleClickUpdate}
-                    style={{
-                        height: "40px",
-                        padding: "10px 20px",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        color: "#fff",
-                        backgroundColor: "#007bff",
-                        border: "none",
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        marginLeft: "auto",// 오른쪽 끝으로 이동
-                        marginRight: "30px"
-                    }}
-                >
-                    레시피 추가
-                </button>
+                <div
+                style={{
+                    marginLeft: "auto",// 오른쪽 끝으로 이동
+                }}>
+                    <button
+                        className={"flex items-center"}
+                        onClick={handleClickDelete}
+                        style={{
+                            height: "40px",
+                            padding: "10px 20px",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            color: "#fff",
+                            backgroundColor: "#007bff",
+                            border: "none",
+                            borderRadius: "4px",
+                            cursor: "pointer",
+                            marginRight: "30px"
+                        }}
+                    >
+                        삭제
+                    </button>
+                    <button
+                        className={"flex items-center"}
+                        onClick={handleClickUpdate}
+                        style={{
+                            height: "40px",
+                            padding: "10px 20px",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            color: "#fff",
+                            backgroundColor: "#007bff",
+                            border: "none",
+                            borderRadius: "4px",
+                            cursor: "pointer",
+                            marginRight: "30px"
+                        }}
+                    >
+                        레시피 수정
+                    </button>
+                </div>
             </div>
 
 
@@ -833,7 +869,9 @@ export const UpdateRecipe = () => {
                             {/* 라벨을 클릭하면 파일 창 열기 */}
                             <label htmlFor={`step-file-${index}`} style={{cursor: 'pointer'}}>
                                 <img
-                                    src={recipeStepSources[index] &&  recipeStepSources[index][0] ? URL.createObjectURL(recipeStepSources[index][0]) : defaultUrl}
+                                    src={recipeStepSources[index] &&
+                                    recipeStepSources[index][0] &&
+                                    URL.createObjectURL(recipeStepSources[index][0])? URL.createObjectURL(recipeStepSources[index][0]) : defaultUrl}
                                     alt="스텝 이미지"
                                     style={{
                                         width: '100px',
