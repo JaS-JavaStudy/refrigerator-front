@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getRecommendedRecipes } from "../../sources/api/recipeAPI";
 import { API_URL_HOST } from "../../sources/api/recipeAPI";
 import defaultImage from "../../assets/image/default.gif";
-import './RecipeRecommend.css';
+import '../../assets/css/recipe/RecipeRecommend.css'
 import { useParams } from "react-router-dom";
 
 function RecipeRecommend() {
@@ -75,7 +75,7 @@ function RecipeRecommend() {
                                 {recipe.remainExpirationDays <= 3 && (
                                     <div className="expiry-warning">
                                         ⚠️ {recipe.urgentIngredientName} 
-                                        {recipe.remainExpirationDays}일 남음
+                                         {recipe.remainExpirationDays} 일 남음
                                     </div>
                                 )}
                             </div>

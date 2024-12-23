@@ -10,8 +10,40 @@ function Recipe() {
     const [recipeList, setRecipeList] = useState([])
     const [search, setSearch] = useState("")
     const navigate = useNavigate();
-    const userPk = localStorage.getItem('userPk');
-    //userPk 를 어떻게 처리할지에 따라 바꿀듯합니다.
+    const [userPk, setUserPk] = useState(null);
+
+    useEffect(() => {
+        // token에서 userPk 추출
+        const checkLogin = () => {
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                alert('로그인이 필요한 서비스입니다.');
+                navigate('/login');
+                return;
+            }
+
+            try {
+                const payload = token.split(".")[1];
+                const decoded = JSON.parse(atob(payload));
+                const extractedUserPk = decoded.username; 
+                
+                if (!extractedUserPk) {
+                    alert('사용자 정보를 찾을 수 없습니다.');
+                    navigate('/login');
+                    return;
+                }
+
+                setUserPk(extractedUserPk);
+            } catch (error) {
+                console.error("Failed to decode token:", error);
+                alert('로그인 정보가 유효하지 않습니다.');
+                navigate('/login');
+            }
+        };
+
+        checkLogin();
+    }, [navigate]);
     const onChangeSearch = (e)=>{
         setSearch(e.target.value)
     }
@@ -26,18 +58,32 @@ function Recipe() {
         const fetchRecipes = async () => {
             try {
                 const data = await getRecipeList();
-                console.log("recipeList",data); // 가져온 데이터 확인
-                setRecipeList(data); // 상태 업데이트
+                console.log("recipeList", data);
+                setRecipeList(data);
             } catch (err) {
                 console.error(err);
             }
         };
 
-        fetchRecipes(); // 비동기 작업 호출
-    }, []);
+        if (userPk) {  // userPk가 있을 때만 레시피 목록 가져오기
+            fetchRecipes();
+        }
+    }, [userPk]);  // userPk가 변경될 때마다 실행
 
     const handleAdd = useCallback(() => {
+        if (!userPk) {
+            alert('로그인이 필요한 서비스입니다.');
+            navigate('/login');
+            return;
+        }
         navigate("/recipe/create");
+    }, [navigate, userPk]);
+
+    const handleRecommand = useCallback(() => {
+        navigate(`/recipe/recommend/${userPk}`);
+    },[navigate])
+    const handleLike = useCallback(() => {
+        navigate(`/recipe/liked/${userPk}`);
     },[navigate])
 
     const handleRecommand = useCallback(() => {
@@ -60,8 +106,8 @@ function Recipe() {
                     <RecipeItem key={recipe.recipePk} recipe={recipe} />
                 ))}
             </div>
-
         </>
-    )
+    );
 }
+
 export default Recipe

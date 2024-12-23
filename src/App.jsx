@@ -7,8 +7,14 @@ import {AddRecipe} from "./pages/recipe/AddRecipe"
 import Join from "./pages/user/Join"
 import Login from "./pages/user/Login"
 import RecipeRecommend from "./pages/recipe/RecipeRecommend"
+<<<<<<< HEAD
 import {UpdateRecipe} from "./pages/recipe/UpdateRecipe.jsx"
 import RecipeLiked from "./pages/recipe/RecipeLiked.jsx"
+=======
+import Logout from "./components/user/Logout"
+import PublicOnlyRoute from "./components/auth/PublicOnlyRoute"
+import RecipeRandom from "./pages/recipe/RecipeRandom"
+>>>>>>> 0f7ffa7e9516556e811f0e86be46b139d4389386
 
 function App() {
     return (
@@ -25,10 +31,15 @@ function App() {
                         <Route path='create' element={<AddRecipe/>} />
                         <Route path='recommend/:userPk' element={<RecipeRecommend/>} />
                         <Route path=':recipePk' element={<RecipeDetail/>}/>
+<<<<<<< HEAD
                         <Route path=':recipePk/update' element={<UpdateRecipe/>} />
+=======
+                        <Route path='random' element={<RecipeRandom/>}/>
+>>>>>>> 0f7ffa7e9516556e811f0e86be46b139d4389386
                     </Route>
-                    <Route path="join" element={<Join/>} />
-                    <Route path="login" element={<Login/>} />
+                    <Route path="join" element={<PublicOnlyRoute><Join/></PublicOnlyRoute>} />
+                    <Route path="login" element={<PublicOnlyRoute><Login/></PublicOnlyRoute>} />
+                    <Route path="logout" element={<Logout/>} />
                 </Route>
 
             </Routes>
