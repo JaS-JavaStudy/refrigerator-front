@@ -1,15 +1,28 @@
-import { Navigate } from "react-router-dom"
+import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { validateToken } from '../../sources/api/UserAPI';
 
 const PublicOnlyRoute = ({ children }) => {
-  const token = localStorage.getItem('token')
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-  // 로그인 상태라면 홈으로 리다이렉트
-  if (token) {
-    alert('이미 로그인되어 있습니다.')
-    return <Navigate to="/" replace={true} />
+  useEffect(() => {
+    const checkAuth = async () => {
+      const isValid = await validateToken();
+      setIsAuthenticated(isValid);
+    };
+    checkAuth();
+  }, []);
+
+  if (isAuthenticated === null) {
+    return null; // 또는 로딩 컴포넌트
   }
 
-  return children
-}
- 
-export default PublicOnlyRoute
+  if (isAuthenticated) {
+    alert('이미 로그인되어 있습니다.');
+    return <Navigate to="/" replace={true} />;
+  }
+
+  return children;
+};
+
+export default PublicOnlyRoute;
