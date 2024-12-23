@@ -4,7 +4,6 @@ import { getUserPk,createRecipe,recipeCategory } from "../../sources/api/recipeA
 
 import { useNavigate } from 'react-router-dom'
 
-
 const initialState = {
     recipeName: '',
     recipeCookingTime: 0,
@@ -32,6 +31,7 @@ export const AddRecipe = () => {
     const [ingredients, setIngredients] = useState([]); // 추가된 재료 목록
     const [ingredientInputTrue,setIngredientInputTrue] = useState("")
     const [ingredientInputFalse,setIngredientInputFalse] = useState("")
+    const navigate = useNavigate();
 
     const defaultUrl = "https://amzn-ap-s3-demo-bucket1-refrigerator-storage.s3.ap-southeast-2.amazonaws.com/noimage.jpg";
     const handleClickAdd = () => {
@@ -66,6 +66,7 @@ export const AddRecipe = () => {
 
         createRecipe(formData)
             .then(res => {
+                alert("레시피가 추가되었습니다")
                 console.log(res);
                 setResult(res);
 

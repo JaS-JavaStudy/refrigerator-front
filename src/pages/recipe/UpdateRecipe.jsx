@@ -55,16 +55,17 @@ export const UpdateRecipe = () => {
 
         formData.append("request",new Blob([JSON.stringify(updatedRequest)],{type:"application/json"}));
 
-        // recipeSources 파일 배열 추가 (메인 이미지)
-        recipeSources.forEach((file) => {
-            formData.append("recipeSources", file); // 같은 이름으로 서버에 전달
+        // recipeSources 파일 배열 추가
+        recipeSources.forEach(file => {
+            formData.append(`recipeSources`, file); // 같은 이름으로 서버에 전달
         });
 
-        // recipeStepSources 추가 (스텝 이미지)
+
+        // recipeStepSources 추가
         recipeStepSources.forEach((files, stepIndex) => {
-            if (files) { // 파일이 있는 경우만 처리
-                files.forEach((file) => {
-                    formData.append("recipeStepSources", file);
+            if (files && files.length > 0) { // 파일이 있는 경우만 처리
+                files.forEach(file => {
+                    formData.append(`recipeStepSources`, file);
                 });
             }
         });
@@ -204,6 +205,7 @@ export const UpdateRecipe = () => {
         try {
             const files = await Promise.all(
                 arrays.map(async (array, index) => {
+
                     const [url, fileName] = array;
                     if (!url || !fileName) { // URL 또는 fileName이 없는 경우 경고 및 무시
                         console.warn("Invalid URL or fileName:", { url, fileName });
@@ -454,7 +456,6 @@ export const UpdateRecipe = () => {
                         레시피 수정
                     </button>
                 </div>
-
             </div>
 
 

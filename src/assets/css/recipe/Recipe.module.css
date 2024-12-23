@@ -1,0 +1,33 @@
+.recipewrapper {
+    display: flex;
+    max-width: 880px; /* 최대 너비 992px */
+    margin: 0 auto;
+    gap: px;
+    flex-wrap: wrap; /* 줄 바꿈 허용 */
+    justify-content:space-between;; /* 카드 간의 간격 조절 */
+    gap: 16px; /* 카드 간의 간격 */
+    padding: 8px; /* 컨테이너 내부 여백 */
+}
+.title {
+    text-align: center;
+}
+.actions {
+    display: flex;
+    width: 880px;
+}
+.actions input {
+    border-radius: 5px;
+    flex-grow: 1;
+    margin-right: 20px;
+    border: 1px solid rgb(220,220,220);
+    padding:10px 0px;
+}
+.actions input:focus {
+    outline: none;
+}
+.actions button{
+    padding:5px;
+    margin:0px 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(220,220,220);
+}

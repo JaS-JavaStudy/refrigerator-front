@@ -37,6 +37,12 @@ export const createRecipe = async (recipe) => {
     return res.data;
 }
 
+export const deleteRecipe = async (recipePk) => {
+    console.log(recipePk,"번 레시피 delete 함수 실행")
+    const url = `${prefix}`;
+    await axios.delete(url,{params:{recipePk}})
+}
+
 export const recipeCategory = async () => {
     const url = `${prefix}/category`;
     const res = await axios.get(url);
@@ -49,11 +55,17 @@ export const getRecommendedRecipes = async (userPk) => {
     return res.data;
 }
 
+
+export const getLikedRecipes = async (userPk) => {
+    const url = `${prefix}/liked?userPk=${userPk}`;
+    const res = await axios.get(url);
+    return res.data
+}
+
 export const updateRecipe = async (recipe) => {
     const url = `${prefix}`;
     const res = await axios.put(url,recipe);
     return res.data;
-
 }
 
 export const deleteRecipe = async (recipePk) => {
