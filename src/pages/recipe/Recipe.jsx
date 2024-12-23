@@ -81,10 +81,10 @@ function Recipe() {
 
     const handleRecommand = useCallback(() => {
         navigate(`/recipe/recommend/${userPk}`);
-    },[navigate])
+    },[navigate,userPk])
     const handleLike = useCallback(() => {
         navigate(`/recipe/liked/${userPk}`);
-    },[navigate])
+    },[navigate,userPk])
     
     return (
         <>
@@ -97,7 +97,7 @@ function Recipe() {
                     <button onClick={handleLike} >좋아요한 레시피 보기</button>
                 </div>
                 {filteredRecipeList.map((recipe) => (
-                    <RecipeItem key={recipe.recipePk} recipe={recipe} />
+                    <RecipeItem key={recipe.recipePk} recipe={recipe} userPk={userPk}/>
                 ))}
             </div>
         </>

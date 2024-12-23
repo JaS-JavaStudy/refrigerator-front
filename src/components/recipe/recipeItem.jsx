@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from 'axios'
 
-const RecipeItem = ({ recipe }) => {
+const RecipeItem = ({ recipe,userPk }) => {
     const navigate = useNavigate()
-    const userPk = localStorage.getItem('userPk');
 
     const imgSrc = recipe.recipeSource.length!==0?recipe.recipeSource[0].recipeSourceSave:defaultRecipeImg
     const toRecipe = ()=>{
@@ -18,7 +17,7 @@ const RecipeItem = ({ recipe }) => {
         try {
             const response = await axios.post(`http://localhost:8080/recipe/reaction`, {
                 recipePk:recipe.recipePk,
-                userPk:1,
+                userPk:userPk,
                 likeStatus:false
             });
             console.log(response.data)
