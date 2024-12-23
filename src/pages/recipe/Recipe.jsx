@@ -85,13 +85,7 @@ function Recipe() {
     const handleLike = useCallback(() => {
         navigate(`/recipe/liked/${userPk}`);
     },[navigate])
-
-    const handleRecommand = useCallback(() => {
-        navigate(`/recipe/recommend/${userPk}`);
-    },[navigate])
-    const handleLike = useCallback(() => {
-        navigate(`/recipe/liked/${userPk}`);
-    },[navigate])
+    
     return (
         <>
             <h1 className={style.title}>레시피 페이지</h1>

@@ -41,7 +41,6 @@ export const getRecommendedRecipes = async (userPk) => {
     return res.data;
 }
 
-<<<<<<< HEAD
 export const getLikedRecipes = async (userPk) => {
     const url = `${prefix}/liked?userPk=${userPk}`;
     const res = await axios.get(url);
@@ -52,11 +51,10 @@ export const updateRecipe = async (recipe) => {
     const url = `${prefix}`;
     const res = await axios.put(url,recipe);
     return res.data;
+}
 
-=======
 export const getRandomRecipe = async () => {
     const url = `${prefix}/random`;
     const res = await axios.get(url);
     return res.data;
->>>>>>> 0f7ffa7e9516556e811f0e86be46b139d4389386
 }
