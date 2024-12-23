@@ -88,6 +88,9 @@ export const UpdateRecipe = () => {
     };
     const handleClickDelete = () => {
         deleteRecipe(recipePk)
+            .then(res => {
+                navigate("/recipe")
+            })
             .catch(err => {
                 console.log(err);
             })
