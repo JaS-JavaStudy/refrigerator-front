@@ -1,9 +1,9 @@
-// Ingredient.jsx
+// ingredient.jsx
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import UsersIngredient from "@/components/ingredient/userIngredient/UsersIngredient"
 import SearchIngredient from "@/components/ingredient/searchIngredient/SearchIngredient"
-import style from '@/assets/css/ingredient/ingredient/Ingredient.module.css'
+import style from '@/assets/css/ingredient/Ingredient.module.css'
 
 function Ingredient() {
     const navigate = useNavigate();

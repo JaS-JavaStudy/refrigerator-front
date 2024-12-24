@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getUsersIngredient } from "@/sources/api/IngredientAPI";
 import UsersIngredientItem from "./UsersIngredientItem";
-import style from '@/assets/css/Ingredient/userIngredient/UsersIngredient.module.css';
+import style from '@/assets/css/userIngredient/UsersIngredient.module.css';
 
 function UserIngredient() {
     const [usersIngredientList, setUserIngredientList] = useState([]);

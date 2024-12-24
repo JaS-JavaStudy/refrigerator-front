@@ -1,9 +1,9 @@
 // SearchIngredient.jsx
 import React, { useState, useEffect } from 'react';
-import { getAllIngredients, addIngredientToMyRefrigerator, createIngredient } from '@/sources/api/IngredientAPI';
+import { getAllIngredients, createIngredient } from '@/sources/api/IngredientAPI';
 import { Search } from 'lucide-react';
 import SearchIngredientList from './SearchIngredientList';
-import style from '@/assets/css/ingredient/ingredient/SearchIngredient.module.css';
+import style from '@/assets/css/ingredient/SearchIngredient.module.css';
 
 const SearchIngredient = () => {
   const [searchTerm, setSearchTerm] = useState('');

@@ -1,6 +1,6 @@
 // SearchIngredientList.jsx
 import React, { useState } from 'react';
-import style from '@/assets/css/ingredient/ingredient/SearchIngredientList.module.css';
+import style from '@/assets/css/ingredient/SearchIngredientList.module.css';
 import AddIngredientModal from '@/components/ingredient/modal/AddIngredientModal';
 
 const SearchIngredientList = ({ isLoading, ingredients, onAddIngredient }) => {
