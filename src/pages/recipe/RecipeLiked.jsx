@@ -1,8 +1,8 @@
 import { useParams,useNavigate } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import { getLikedRecipes } from '@/sources/api/recipeAPI';
-import RecipeItem from '@/components/recipe/RecipeItem';
-import style from "@/assets/css/recipe/recipe.module.css"
+import RecipeItem from '@/components/recipe/recipeItem';
+import style from "@/assets/css/recipe/Recipe.module.css"
 function RecipeLiked() {
     const { userPk } = useParams()
     const [likedRecipeList, setLikedRecipeList] = useState([])
