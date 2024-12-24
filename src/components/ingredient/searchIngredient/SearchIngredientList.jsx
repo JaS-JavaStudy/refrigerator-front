@@ -49,7 +49,7 @@ const SearchIngredientList = ({ isLoading, ingredients, onAddIngredient }) => {
             <div key={ingredient.ingredientManagementPk} className={style.cardContainer}>
               <div className={style.ingredientCard}>
                 <img
-                  src={ingredient.image || 'https://cdn.mindgil.com/news/photo/202211/75510_16178_5715.jpg'}
+                  src={ingredient.image || `../src/assets/image/ingredient/${ingredient.ingredientName}.jpg`}
                   alt={ingredient.ingredientName}
                   className={style.ingredientImage}
                 />
