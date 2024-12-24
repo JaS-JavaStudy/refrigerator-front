@@ -1,0 +1,87 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-bottom: 15px;
+    position: sticky; /* 스크롤 시 상단 고정 */
+    top: 0;
+    z-index: 1000; /* 다른 요소 위로 */
+    padding: 0.8rem 2rem;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.logoReci {
+    color: black; /* Reci의 기본 색상 */
+}
+
+.logoPick {
+    color: #3FA2F6; /* Pick의 초록색 */
+    font-weight: 900; /* 강조 */
+}
+
+.nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav a {
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: rgb(61, 60, 60);
+}
+
+.alertContainer {
+    position: relative; /* 알림 버튼 컨테이너 기준으로 위치 설정 */
+    display: inline-block;
+    cursor: pointer;
+}
+
+.alerts {
+    position: absolute; /* 부모 컨테이너를 기준으로 절대 위치 */
+    top: 100%; /* 컨테이너 바로 아래에 표시 */
+    left: -100%; /* 부모 컨테이너 기준으로 가장 왼쪽에 위치 */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 250px;
+    z-index: 1000; /* 다른 요소 위에 표시 */
+    max-height: 200px; /* 최대 높이 설정 */
+    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+    transform: translateX(-150px); /* 알림 위치를 더 왼쪽으로 이동 */
+}
+
+.alerts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.alerts li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.alerts li:last-child {
+    border-bottom: none;
+}
+
+.alerts p {
+    margin: 0;
+    text-align: center;
+    color: #666;
+}

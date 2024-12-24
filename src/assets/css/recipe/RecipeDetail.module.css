@@ -1,0 +1,50 @@
+
+.imgdivcontainer {
+    display:flex;
+    margin:0 auto;
+    width: 992px;
+    height: 400px;
+}
+.imgdiv{
+    margin:20px 0px;
+    text-align: center;
+    padding: 30px 30px;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 10px;
+    width: 400px;
+    height: 360px;
+}
+.information {
+    margin:20px;
+    margin-right: 0px;
+    flex-grow:1;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 10px;
+    padding:40px 30px;
+}
+.information p{
+    margin:5px;
+}
+
+.information div{
+    text-align: right;
+}
+.information button{
+    padding:5px;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 5px;
+}
+
+.container {
+    text-align: center;
+    padding: 40px 50px;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 10px;
+    max-width: 992px;
+    margin:0px auto;
+    margin-bottom: 50px;
+}
+.container h2 {
+    margin-bottom:30px;
+}
+

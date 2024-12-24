@@ -1,0 +1,101 @@
+/* UsersIngredientItem.module.css */
+.card {
+  width: 260px;
+  height: auto;
+  background-color: #ffffff;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.imageWrapper {
+  position: relative;
+}
+
+.image {
+  border-radius: 10px;
+  height: 120px;
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
+.favoriteAndQuantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -30px;
+  padding: 0;
+}
+
+.favoriteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(207, 205, 205, 0.7);
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  margin-top: 2px;
+}
+
+.favoriteButton:hover {
+  background-color: rgb(66, 55, 55);
+}
+
+.quantity {
+  background-color: rgba(207, 205, 205, 0.7);
+  color: black;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0.2rem 0;
+  text-align: center;
+}
+
+.details {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.1rem;
+  line-height: 1.4;
+}
+
+.details strong {
+  color: #333;
+  font-weight: bold;
+}
+
+.useButton {
+  align-self: flex-end;
+  background-color: rgba(207, 205, 205, 1);
+  color: black;
+  font-weight: 500;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 5;
+}
+
+.useButton:hover {
+  background-color: rgb(179, 178, 178);
+}
