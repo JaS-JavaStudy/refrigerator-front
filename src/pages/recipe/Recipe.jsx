@@ -85,6 +85,15 @@ function Recipe() {
     const handleLike = useCallback(() => {
         navigate(`/recipe/liked/${userPk}`);
     },[navigate,userPk])
+
+    const handleRandom = useCallback(() => {
+        if (!userPk) {
+            alert('로그인이 필요한 서비스입니다.');
+            navigate('/login');
+            return;
+        }
+        navigate("/recipe/random");
+    }, [navigate, userPk]);
     
     return (
         <>
@@ -95,6 +104,7 @@ function Recipe() {
                     <button onClick={handleAdd}>레시피 추가</button>
                     <button onClick={handleRecommand}>맞춤 레시피 보기</button>
                     <button onClick={handleLike} >좋아요한 레시피 보기</button>
+                    <button onClick={handleRandom}>랜덤 레시피 뽑기</button>
                 </div>
                 {filteredRecipeList.map((recipe) => (
                     <RecipeItem key={recipe.recipePk} recipe={recipe} userPk={userPk}/>
