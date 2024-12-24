@@ -1,6 +1,6 @@
 // UseIngredientModal.jsx
 import React, { useState } from 'react';
-import style from '../../../assets/css/ingredient/ingredient/SearchIngredientList.module.css';
+import style from '@/assets/css/ingredient/ingredient/SearchIngredientList.module.css';
 
 function UseIngredientModal({ ingredient, onClose, onConfirm }) {
   const [useAmount, setUseAmount] = useState(1);

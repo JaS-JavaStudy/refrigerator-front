@@ -1,9 +1,9 @@
 // UsersIngredientItem.jsx
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import style from '../../../assets/css/Ingredient/userIngredient/UsersIngredientItem.module.css';
+import style from '@/assets/css/Ingredient/userIngredient/UsersIngredientItem.module.css';
 import React, { useState } from 'react';
-import { updateIngredientBookmark, deleteIngredient } from '../../../sources/api/IngredientAPI';
+import { updateIngredientBookmark, deleteIngredient } from '@/sources/api/IngredientAPI';
 import UseIngredientModal from '../modal/UseIngredientModal';
 
 function UsersIngredientItem({ userIngredient }) {

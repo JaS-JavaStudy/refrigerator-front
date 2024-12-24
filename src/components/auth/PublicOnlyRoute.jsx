@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { validateToken } from '../../sources/api/UserAPI';
+import { validateToken } from '@/sources/api/UserAPI';
 
 const PublicOnlyRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);

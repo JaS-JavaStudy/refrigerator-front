@@ -1,5 +1,5 @@
-import defaultRecipeImg from "../../assets/image/recipeimage.png"
-import style from "../../assets/css/recipe/RecipeItem.module.css"
+import defaultRecipeImg from "@/assets/image/recipeimage.png"
+import style from "@/assets/css/recipe/RecipeItem.module.css"
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from 'axios'

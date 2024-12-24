@@ -1,6 +1,6 @@
-import JoinForm from '../../components/user/JoinForm'
+import JoinForm from '@/components/user/JoinForm'
 import { Container } from "react-bootstrap"
-import styles from '../../assets/css/user/Join.module.css'
+import styles from '@/assets/css/user/Join.module.css'
 
 const Join = () => {
   return ( 

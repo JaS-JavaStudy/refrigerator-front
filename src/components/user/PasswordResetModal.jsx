@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import { userApi } from "../../sources/api/UserAPI"
-import styles from '../../assets/css/user/PasswordResetModal.module.css'
+import { userApi } from "@/sources/api/UserAPI"
+import styles from '@/assets/css/user/PasswordResetModal.module.css'
 
 const PasswordResetModal = ({show, onHide}) => {
   const [email, setEmail] = useState('')

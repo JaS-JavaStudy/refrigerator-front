@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { userApi } from '../../sources/api/UserAPI';
-import styles from '../../assets/css/user/Login.module.css';
+import { userApi } from '@/sources/api/UserAPI.js';
+import styles from '@/assets/css/user/Login.module.css';
 
 const LoginForm = ({ onPasswordReset }) => {
   const [formData, setFormData] = useState({

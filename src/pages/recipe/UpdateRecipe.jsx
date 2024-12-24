@@ -6,7 +6,7 @@ import {
     getRecipeDetail,
     recipeCategory,
     updateRecipe
-} from "../../sources/api/recipeAPI.jsx";
+} from "@/sources/api/recipeAPI.jsx";
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 

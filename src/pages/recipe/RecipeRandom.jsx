@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { getRandomRecipe } from '../../sources/api/recipeAPI';
-import defaultImage from "../../assets/image/default.gif";
-import '../../assets/css/recipe/RecipeRandom.css';
-import { API_URL_HOST } from '../../sources/api/recipeAPI';
+import { getRandomRecipe } from '@/sources/api/recipeAPI';
+import defaultImage from "@/assets/image/default.gif";
+import '@/assets/css/recipe/RecipeRandom.css';
 import { useNavigate } from 'react-router-dom';
 
 function RecipeRandom() {

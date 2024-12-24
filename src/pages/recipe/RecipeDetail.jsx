@@ -1,8 +1,8 @@
 import { useParams,useNavigate } from 'react-router-dom'
 import { useEffect, useState,useCallback } from "react"
-import { getRecipeDetail,deleteRecipe } from "../../sources/api/recipeAPI.jsx";
-import defaultRecipeImg from "../../assets/image/recipeimage.png"
-import style from "../../assets/css/recipe/RecipeDetail.module.css"
+import { getRecipeDetail,deleteRecipe } from "@/sources/api/recipeAPI.jsx";
+import defaultRecipeImg from "@/assets/image/recipeimage.png"
+import style from "@/assets/css/recipe/RecipeDetail.module.css"
 
 function RecipeDetail() {
     const { recipePk } = useParams()

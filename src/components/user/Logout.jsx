@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { userApi } from '../../sources/api/UserAPI';
+import { userApi } from '@/sources/api/UserAPI';
 
 const Logout = () => {
   useEffect(() => {

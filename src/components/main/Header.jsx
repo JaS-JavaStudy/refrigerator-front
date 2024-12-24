@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import style from "../../assets/css/main/header.module.css";
+import style from "@/assets/css/main/header.module.css";
 
 function Header() {
     const [userPk, setUserPk] = useState(null); // JWT에서 추출한 userPk

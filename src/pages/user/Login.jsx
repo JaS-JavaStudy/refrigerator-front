@@ -1,9 +1,9 @@
-import LoginForm from "../../components/user/LoginForm"
+import LoginForm from "@/components/user/LoginForm"
 import { Container } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import styles from "../../assets/css/user/Login.module.css"
+import styles from "@/assets/css/user/Login.module.css"
 import { useState } from "react"
-import PasswordResetModal from "../../components/user/PasswordResetModal"
+import PasswordResetModal from "@/components/user/PasswordResetModal"
 
 const Login = () => {
   const [showResetModal, setShowResetModal] = useState(false)

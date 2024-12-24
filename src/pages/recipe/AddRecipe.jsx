@@ -1,6 +1,6 @@
 
 import { useState,useEffect } from 'react';
-import { getUserPk,createRecipe,recipeCategory } from "../../sources/api/recipeAPI.jsx";
+import { getUserPk,createRecipe,recipeCategory } from "@/sources/api/recipeAPI.jsx";
 import { useNavigate } from 'react-router-dom'
 
 const initialState = {

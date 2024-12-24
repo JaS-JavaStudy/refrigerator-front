@@ -1,9 +1,8 @@
 // RecipeRecommend.jsx
 import { useEffect, useState } from "react";
-import { getRecommendedRecipes } from "../../sources/api/recipeAPI";
-import { API_URL_HOST } from "../../sources/api/recipeAPI";
-import defaultImage from "../../assets/image/default.gif";
-import '../../assets/css/recipe/RecipeRecommend.css'
+import { getRecommendedRecipes } from "@/sources/api/recipeAPI";
+import defaultImage from "@/assets/image/default.gif";
+import '@/assets/css/recipe/RecipeRecommend.css'
 import { useParams, useNavigate } from "react-router-dom";
 
 function RecipeRecommend() {
