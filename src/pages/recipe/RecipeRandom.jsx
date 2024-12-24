@@ -116,11 +116,11 @@ function RecipeRandom() {
                        <div className="recipe-card">
                        <div className="recipe-image-container">
                             <img 
-                                src={recipe.mainImages && recipe.mainImages.length > 0
-                                    ? `${API_URL_HOST}/${recipe.mainImages[0].filePath}`
-                                    : defaultImage}
-                                alt={recipe.recipeName}
-                                className="recipe-image"
+                            src={recipe.mainImages?.length > 0 
+                                ? recipe.mainImages[0].filePath
+                                : defaultImage}
+                            alt={recipe.recipeName}
+                            className="recipe-image"
                             />
                         </div>
                            
