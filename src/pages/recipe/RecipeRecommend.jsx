@@ -4,16 +4,22 @@ import { getRecommendedRecipes } from "../../sources/api/recipeAPI";
 import { API_URL_HOST } from "../../sources/api/recipeAPI";
 import defaultImage from "../../assets/image/default.gif";
 import '../../assets/css/recipe/RecipeRecommend.css'
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function RecipeRecommend() {
     const [recommendedRecipes, setRecommendedRecipes] = useState([]);
     const {userPk} = useParams();
+    const navigate = useNavigate();
+
+    const handleViewRecipe = (recipePk) => {
+        navigate(`/recipe/${recipePk}`);
+    };
 
     useEffect(() => {
         const fetchRecommendedRecipes = async () => {
             try {
                 const data = await getRecommendedRecipes(userPk);
+                console.log('추천 레시피 데이터:', data);
                 setRecommendedRecipes(data);
             } catch (err) {
                 console.error("레시피 추천 로드 실패:", err);
@@ -32,13 +38,15 @@ function RecipeRecommend() {
             <div className="recipe-grid">
                 {recommendedRecipes.map(recipe => (
                     <div key={recipe.recipePk} className="recipe-card">
-                        <img 
-                            src={recipe.mainImages?.length > 0 
-                                ? `${API_URL_HOST}/${recipe.mainImages[0].filePath}`
-                                : defaultImage}
-                            alt={recipe.recipeName}
-                            className="recipe-image"
-                        />
+                        <div className="image-container">
+                            <img 
+                                src={recipe.mainImages?.length > 0 
+                                    ? recipe.mainImages[0].filePath
+                                    : defaultImage}
+                                alt={recipe.recipeName}
+                                className="recipe-image"
+                            />
+                        </div>
                         
                         <div className="recipe-content">
                             <h3 className="recipe-title">{recipe.recipeName}</h3>
@@ -79,8 +87,10 @@ function RecipeRecommend() {
                                     </div>
                                 )}
                             </div>
-
-                            <button className="view-recipe-btn">
+                            <button 
+                                className="view-recipe-btn"
+                                onClick={() => handleViewRecipe(recipe.recipePk)}
+                            >
                                 레시피 보기
                             </button>
                         </div>
