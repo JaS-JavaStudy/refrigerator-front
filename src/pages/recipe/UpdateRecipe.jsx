@@ -215,7 +215,17 @@ export const UpdateRecipe = () => {
                         return null;
                     }
 
-                    const response = await fetch(url); // 해당 URL에서 데이터를 가져옴
+                    const response = await fetch(url,
+                        {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            mode: "cors",
+                            cache: "no-cache",
+                            credentials: "same-origin",
+                            redirect: "follow",
+                        }); // 해당 URL에서 데이터를 가져옴
                     const blob = await response.blob(); // Blob으로 변환
                     const file = new File([blob], fileName, { type: blob.type }); // Blob을 File로 변환
                     return file;
