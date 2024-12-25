@@ -57,8 +57,13 @@ function RecipeDetail() {
                 <p>조리시간 {recipeDetail.recipeCookingTime}분</p>
                 <p>난이도 {recipeDetail.recipeDifficulty}</p>
                 <p>조회수 {recipeDetail.recipeViews}</p>
-                <p>재료</p>
-                {recipeDetail.ingredients && recipeDetail.ingredients.map(ingredient => (<p key={ingredient.ingredientPk}>{ingredient.ingredientName}</p>))}
+                <p>재료   {recipeDetail.ingredients && recipeDetail.ingredients.map((ingredient, index) => (
+                        <>
+                        {ingredient.ingredientManagement.ingredientName}
+                        {index < recipeDetail.ingredients.length - 1 && ", "} {/* 마지막 항목 뒤에는 콤마를 추가하지 않음 */}
+                        </>
+                    ))}
+                </p>
             </div>
         </div>
         <div className={style.container}>
@@ -66,7 +71,7 @@ function RecipeDetail() {
             {recipeDetail.recipeStep && 
             recipeDetail.recipeStep.map((step, index) => (
                 <div key={step?.recipeStepOrder}>
-                    <p>Step {index + 1}: {step.recipeStepContent}</p>
+                    <h3>Step {index + 1}: {step.recipeStepContent}</h3>
                     {step.recipeStepSource && (
                         <img
                             src={step.recipeStepSource.recipeStepSourceSave}

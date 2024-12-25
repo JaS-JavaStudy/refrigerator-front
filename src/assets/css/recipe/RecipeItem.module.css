@@ -13,8 +13,13 @@
   background-color: #e0e0e0;
 }
 .card p {
-    text-align: left;
-    margin: 0; /* p 태그의 기본 margin을 제거하여 깔끔하게 왼쪽 정렬 */
+  text-align: left;
+  margin: 0; /* p 태그의 기본 margin을 제거하여 깔끔하게 왼쪽 정렬 */
+
+}
+.card .content{
+  overflow: hidden; /* 넘치는 텍스트 숨기기 */
+  text-overflow: ellipsis;
 }
 .card h3 {
     text-align: center;
@@ -25,3 +30,6 @@
     height: auto; /* 이미지 비율 유지 */
     object-fit: cover; /* 이미지 비율을 유지하면서 공간을 채움 */
   }
+.card button{
+  background-color: rgba(0, 0,0, 0);
+}

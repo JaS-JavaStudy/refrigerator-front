@@ -24,7 +24,7 @@ function RecipeLiked() {
         <h1 className={style.title}>좋아요한 레시피 페이지</h1>
         <div className={style.recipewrapper}>
             {likedRecipeList.map((recipe) => (
-                <RecipeItem key={recipe.recipePk} recipe={recipe} />
+                <RecipeItem key={recipe.recipePk} recipe={recipe} userPk={userPk}/>
             ))}
         </div>
         </>

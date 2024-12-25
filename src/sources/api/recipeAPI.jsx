@@ -74,3 +74,8 @@ export const getRandomRecipe = async () => {
     return res.data;
 }
 
+export const getLikeStatus = async (userPk,recipePk) => {
+    const url = `${prefix}/status`;
+    const res = await axios.get(url,{params:{recipePk,userPk,likeStatus:false}})
+    return res.data
+}
