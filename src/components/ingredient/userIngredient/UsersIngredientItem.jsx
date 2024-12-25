@@ -39,7 +39,7 @@ function UsersIngredientItem({ userIngredient }) {
             <Card className={style.card}>
                 <div className={style.imageWrapper}>
                     <img
-                        src={userIngredient.image || 'https://cdn.mindgil.com/news/photo/202211/75510_16178_5715.jpg'}
+                        src={userIngredient.image || `../src/assets/image/ingredient/${userIngredient.ingredientName}.jpg`}
                         alt={userIngredient.ingredientName}
                         className={style.image}
                     />
