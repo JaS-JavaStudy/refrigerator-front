@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const initialState = {
     recipeName: '',
     recipeCookingTime: 0,
-    recipeDifficulty: 0,
+    recipeDifficulty: 1,
     recipeContent: '',
     recipeSteps: [],
     recipeCategoryPk: 0,
