@@ -1,33 +1,101 @@
 .recipewrapper {
-    display: flex;
-    max-width: 880px; /* 최대 너비 992px */
+    max-width: 880px;
     margin: 0 auto;
-    gap: px;
-    flex-wrap: wrap; /* 줄 바꿈 허용 */
-    justify-content:space-between;; /* 카드 간의 간격 조절 */
-    gap: 16px; /* 카드 간의 간격 */
-    padding: 8px; /* 컨테이너 내부 여백 */
+    padding: 16px;
 }
+
 .title {
     text-align: center;
+    margin-bottom: 24px;
 }
+
 .actions {
     display: flex;
-    width: 880px;
+    width: 100%;
+    max-width: 880px;
+    margin: 0 auto 24px auto;
+    gap: 8px;
+    padding: 0 16px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    padding: 16px 0;
 }
+
 .actions input {
     border-radius: 5px;
-    flex-grow: 1;
-    margin-right: 20px;
+    flex: 1;
+    min-width: 200px;
     border: 1px solid rgb(220,220,220);
-    padding:10px 0px;
+    padding: 10px 12px;
 }
+
 .actions input:focus {
     outline: none;
+    border-color: rgb(180,180,180);
 }
-.actions button{
-    padding:5px;
-    margin:0px 5px;
+
+.actions button {
+    padding: 10px 16px;
     border-radius: 5px;
     border: 1px solid rgb(220,220,220);
+    white-space: nowrap;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.actions button:hover {
+    background: rgb(245,245,245);
+}
+
+/* Recipe grid container */
+.recipeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding-top: 16px;
+}
+
+/* Add these styles to RecipeItem component's CSS module */
+.recipeItem {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.recipeImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.recipeContent {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipeTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.recipeDescription {
+    color: rgb(100,100,100);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    flex: 1;
+}
+
+.recipeActions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
 }
