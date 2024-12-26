@@ -42,7 +42,7 @@ export const AddRecipe = () => {
             return; // UserPk가 없을 시 요청을 중단
         }// request 기본 글은 그냥 추가
 
-        const updatedRequest = { ...request, recipeUserPk: userPk };
+        const updatedRequest = { ...request, userPk: userPk };
 
         formData.append("request",new Blob([JSON.stringify(updatedRequest)],{type:"application/json"}));
 
